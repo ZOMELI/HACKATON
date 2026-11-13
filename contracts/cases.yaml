@@ -1,0 +1,231 @@
+openapi: 3.0.3
+info:
+  title: cases-service
+  version: 0.1.0
+  description: Reglas de conciliación, casos, alertas de vencimiento configurables y decisión del responsable.
+servers:
+  - url: http://localhost:8084
+paths:
+  /reconciliations:
+    post:
+      summary: Ejecuta las reglas sobre las afirmaciones vigentes del libro (lo llama ingestion-service tras sincronizar)
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                syncId: { type: string }
+      responses:
+        '200':
+          description: Resultado de la conciliación
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/ReconciliationResult' }
+  /cases:
+    get:
+      summary: Bandeja de casos visibles para el usuario simulado
+      parameters:
+        - { $ref: '#/components/parameters/UserId' }
+        - { $ref: '#/components/parameters/UserRole' }
+        - { name: status, in: query, schema: { $ref: '#/components/schemas/CaseStatus' } }
+        - { name: type, in: query, schema: { $ref: '#/components/schemas/CaseType' } }
+        - { name: personId, in: query, schema: { type: string } }
+      responses:
+        '200':
+          description: Casos ordenados por fecha límite
+          content:
+            application/json:
+              schema: { type: array, items: { $ref: '#/components/schemas/Case' } }
+  /cases/{id}:
+    get:
+      parameters:
+        - { name: id, in: path, required: true, schema: { type: string } }
+      responses:
+        '200':
+          description: Detalle del caso
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/Case' }
+        '404': { description: No existe }
+  /cases/{id}/decisions:
+    post:
+      summary: El responsable elige una de las opciones del caso. Registra la decisión en el libro y cierra el caso.
+      parameters:
+        - { name: id, in: path, required: true, schema: { type: string } }
+        - { name: X-User-Id, in: header, required: true, schema: { type: string } }
+        - { $ref: '#/components/parameters/UserRole' }
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [optionId]
+              properties:
+                optionId: { type: string }
+                comment: { type: string }
+      responses:
+        '200':
+          description: Caso resuelto
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/Case' }
+        '400': { description: Opción inválida o falta X-User-Id }
+        '403': { description: El usuario no es responsable de esta persona }
+        '404': { description: No existe }
+        '409': { description: El caso ya fue resuelto }
+        '502': { description: No se pudo registrar la decisión en el libro; el caso sigue abierto }
+  /availability:
+    get:
+      summary: Disponibilidad prevista y confirmada, por fecha
+      parameters:
+        - { $ref: '#/components/parameters/UserId' }
+        - { $ref: '#/components/parameters/UserRole' }
+      responses:
+        '200':
+          description: Lista ordenada por fecha
+          content:
+            application/json:
+              schema: { type: array, items: { $ref: '#/components/schemas/AvailabilityItem' } }
+  /alert-settings:
+    get:
+      responses:
+        '200':
+          description: Días de anticipación vigentes
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/AlertSettings' }
+    put:
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: '#/components/schemas/AlertSettings' }
+      responses:
+        '200':
+          description: Guardado
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/AlertSettings' }
+        '400': { description: Valores fuera de rango (1 a 365) }
+components:
+  parameters:
+    UserId:
+      name: X-User-Id
+      in: header
+      description: Matrícula del usuario simulado. Sin cabecera se asume gerente (ve todo).
+      schema: { type: string }
+    UserRole:
+      name: X-User-Role
+      in: header
+      schema: { type: string, enum: [CL, CAL, MANAGER] }
+  schemas:
+    CaseStatus: { type: string, enum: [OPEN, RESOLVED] }
+    CaseType:
+      type: string
+      enum:
+        - BUDGET_ASSIGNMENT_MISMATCH   # trabaja (Jira) en una tribu distinta a la que lo financia (PREPER) sin apoyo temporal vigente
+        - MOVEMENT_NOT_REFLECTED       # movimiento aprobado y efectivo que SIGA aún no refleja
+        - MANAGER_MISMATCH             # SIGA y el Excel de chapters nombran responsables distintos
+        - MOVEMENT_WITHOUT_EVIDENCE    # movimiento aprobado sin correo de aprobación
+        - SWAP_INCOMPLETE              # enroque con conformidad de una sola parte
+        - CONTRACT_EXPIRING            # acta por vencer (o vencida) sin renovación ni reemplazo
+        - AVAILABILITY_UNCONFIRMED     # disponibilidad prevista próxima sin confirmar
+        - TEMP_SUPPORT_EXPIRED         # apoyo temporal vencido y la persona sigue asignada a la tribu anfitriona
+        - INVENTORY_MISMATCH           # el inventario del CL y SIGA ubican a la persona en tribus distintas
+        - UNMATCHED_IDENTITY           # usuario de Jira que no enlaza con ninguna persona
+    ClaimSnapshot:
+      type: object
+      description: Copia de la afirmación del libro al abrir el caso, siempre con fuente y fecha de consulta
+      properties:
+        claimId: { type: string }
+        subject: { type: string }
+        value: { type: string }
+        attributes: { type: object, additionalProperties: { type: string } }
+        source: { type: string }
+        sourceRef: { type: string }
+        observedAt: { type: string, format: date-time }
+        validFrom: { type: string, format: date }
+        validUntil: { type: string, format: date }
+    Evidence:
+      type: object
+      properties:
+        type: { type: string }
+        emailId: { type: string }
+        quote: { type: string }
+        approver: { type: string }
+        personIds: { type: array, items: { type: string } }
+        date: { type: string, format: date }
+        aiGenerated: { type: boolean }
+    CaseOption:
+      type: object
+      properties:
+        id: { type: string }
+        label: { type: string, description: Texto definido por la regla }
+        text: { type: string, description: Texto redactado (IA o plantilla) }
+    Summary:
+      type: object
+      properties:
+        text: { type: string }
+        aiGenerated: { type: boolean, description: Si es true la web muestra "redactado por IA" }
+        mode: { type: string, enum: [LIVE, RECORDED, FALLBACK], description: FALLBACK = agents-service no respondió y se usó la plantilla local }
+    Decision:
+      type: object
+      properties:
+        optionId: { type: string }
+        optionLabel: { type: string }
+        comment: { type: string }
+        decidedBy: { type: string }
+        decidedAt: { type: string, format: date-time }
+        ledgerClaimIds: { type: array, items: { type: string } }
+    Case:
+      type: object
+      properties:
+        id: { type: string }
+        type: { $ref: '#/components/schemas/CaseType' }
+        status: { $ref: '#/components/schemas/CaseStatus' }
+        title: { type: string }
+        personId: { type: string }
+        personName: { type: string }
+        ownerId: { type: string, description: Responsable que debe decidir }
+        ownerName: { type: string }
+        dueDate: { type: string, format: date }
+        openedAt: { type: string, format: date-time }
+        claims: { type: array, items: { $ref: '#/components/schemas/ClaimSnapshot' } }
+        evidence: { type: array, items: { $ref: '#/components/schemas/Evidence' } }
+        summary: { $ref: '#/components/schemas/Summary' }
+        options: { type: array, items: { $ref: '#/components/schemas/CaseOption' } }
+        decision: { $ref: '#/components/schemas/Decision' }
+    ReconciliationResult:
+      type: object
+      properties:
+        reconciliationId: { type: string }
+        ranAt: { type: string, format: date-time }
+        claimsRead: { type: integer }
+        casesOpened: { type: integer }
+        casesAlreadyKnown: { type: integer }
+        openedCaseIds: { type: array, items: { type: string } }
+    AvailabilityItem:
+      type: object
+      properties:
+        personId: { type: string }
+        personName: { type: string }
+        personRole: { type: string }
+        availableFrom: { type: string, format: date }
+        status: { type: string, enum: [PLANNED, CONFIRMED] }
+        source: { type: string }
+        observedAt: { type: string, format: date-time }
+        confirmerId: { type: string, description: Quién debe confirmar }
+        confirmerName: { type: string }
+        alert: { type: boolean, description: Prevista, sin confirmar y dentro de los días de anticipación }
+        caseId: { type: string, nullable: true }
+    AlertSettings:
+      type: object
+      required: [contractExpiryDays, availabilityDays]
+      properties:
+        contractExpiryDays: { type: integer, minimum: 1, maximum: 365, default: 30 }
+        availabilityDays: { type: integer, minimum: 1, maximum: 365, default: 15 }
+        updatedAt: { type: string, format: date-time }
+        updatedBy: { type: string }

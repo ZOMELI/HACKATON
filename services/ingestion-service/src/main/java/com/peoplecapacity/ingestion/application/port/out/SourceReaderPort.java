@@ -5,7 +5,7 @@ import java.util.List;
 
 /**
  * Puerto de salida: un adaptador por fuente. Para agregar una fuente basta crear otra implementación.
- * Implementados: PREPER y SIGA. Pendientes con SDD: JIRA, INVENTORY, MOVIPER, PROVIDER_ACT,
+ * Implementados: PREPER, SIGA y JIRA. Pendientes con SDD: INVENTORY, MOVIPER, PROVIDER_ACT,
  * STAFFING_PORTAL, RECRUITMENT y EMAIL.
  */
 public interface SourceReaderPort {

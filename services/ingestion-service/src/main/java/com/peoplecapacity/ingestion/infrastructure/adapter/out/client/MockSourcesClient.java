@@ -18,4 +18,16 @@ public interface MockSourcesClient {
     @GET
     @Path("/siga/employees")
     List<Map<String, Object>> sigaEmployees();
+
+    @GET
+    @Path("/siga/org-units")
+    List<Map<String, Object>> sigaOrgUnits();
+
+    @GET
+    @Path("/jira/rest/api/3/project")
+    List<Map<String, Object>> jiraProjects();
+
+    @GET
+    @Path("/jira/rest/api/3/search")
+    Map<String, Object> jiraIssues(@QueryParam("startAt") int startAt, @QueryParam("maxResults") int maxResults);
 }

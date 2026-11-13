@@ -1,0 +1,28 @@
+server:
+  port: 8084
+spring:
+  application:
+    name: cases-service
+  datasource:
+    url: ${DB_URL:jdbc:postgresql://localhost:5433/hackaton}
+    username: ${DB_USER:assistant}
+    password: ${DB_PASSWORD:assistant}
+  jpa:
+    open-in-view: false
+    hibernate:
+      ddl-auto: validate   # las migraciones viven en database/cases (Flyway del docker-compose)
+ledger:
+  mode: http                           # siempre el ledger-service real; las pruebas usan un libro de ejemplo
+  url: ${LEDGER_URL:http://localhost:8083}
+agents:
+  enabled: ${AGENTS_ENABLED:true}      # false = siempre plantilla local
+  url: ${AGENTS_URL:http://localhost:8086}
+cases:
+  default-owner-id: ${CASES_DEFAULT_OWNER_ID:G40001}   # quién decide si la persona no tiene responsable en el libro
+  reference-date: ${CASES_REFERENCE_DATE:}             # yyyy-MM-dd para fijar "hoy" en la demo; vacío = fecha real
+  reconcile-on-startup: ${CASES_RECONCILE_ON_STARTUP:false}
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health

@@ -1,0 +1,90 @@
+[
+  {
+    "emailId": "MAIL-002",
+    "type": "MOVEMENT_APPROVAL",
+    "personIds": ["U10002"],
+    "movementId": "MOV-102",
+    "contractId": null,
+    "effectiveFrom": "2026-10-15",
+    "effectiveUntil": null,
+    "approver": "C30001",
+    "quote": "Apruebo el movimiento MOV-102 de Luis Ramos (U10002) a la tribu Riesgos desde el 15 de octubre."
+  },
+  {
+    "emailId": "MAIL-005",
+    "type": "SWAP_CONFORMITY",
+    "personIds": ["U10005", "U10006"],
+    "movementId": "ENR-201",
+    "contractId": null,
+    "effectiveFrom": "2026-12-01",
+    "effectiveUntil": null,
+    "approver": "L20002",
+    "quote": "Doy mi conformidad al enroque ENR-201 entre Sofía Vega (U10005) y Marco Ríos (U10006)."
+  },
+  {
+    "emailId": "MAIL-009",
+    "type": "TEMP_SUPPORT",
+    "personIds": ["U10009"],
+    "movementId": null,
+    "contractId": null,
+    "effectiveFrom": "2026-08-01",
+    "effectiveUntil": "2026-11-06",
+    "approver": "L20002",
+    "quote": "Renzo Flores (U10009) apoyará a Riesgos hasta el 6 de noviembre."
+  },
+  {
+    "emailId": "MAIL-010",
+    "type": "MOVEMENT_APPROVAL",
+    "personIds": ["U10010"],
+    "movementId": "MOV-110",
+    "contractId": null,
+    "effectiveFrom": "2026-09-01",
+    "effectiveUntil": null,
+    "approver": "C30001",
+    "quote": "Aprobado el movimiento MOV-110 de Elena Castro (U10010) a Pagos."
+  },
+  {
+    "emailId": "MAIL-011",
+    "type": "CONTRACT_RENEWAL",
+    "personIds": ["U10011"],
+    "movementId": null,
+    "contractId": "ACT-311",
+    "effectiveFrom": "2026-11-29",
+    "effectiveUntil": "2027-05-28",
+    "approver": "L20002",
+    "quote": "Se renueva el acta ACT-311 de Hugo Lazo (U10011) por seis meses más."
+  },
+  {
+    "emailId": "MAIL-020",
+    "type": "INFORMAL_NEED",
+    "personIds": [],
+    "movementId": null,
+    "contractId": null,
+    "effectiveFrom": "2026-12-01",
+    "effectiveUntil": null,
+    "approver": null,
+    "quote": "Necesitamos un Backend Developer para el Squad Transferencias a partir del 1 de diciembre."
+  },
+  {
+    "emailId": "MAIL-021",
+    "type": "CONTRACT_REPLACEMENT",
+    "personIds": ["U10015", "U10016"],
+    "movementId": null,
+    "contractId": "ACT-320",
+    "effectiveFrom": "2026-11-16",
+    "effectiveUntil": null,
+    "approver": "L20002",
+    "quote": "En el acta ACT-320 se reemplaza a Raúl Tello (U10015) por Kevin Ore (U10016) desde el 16 de noviembre."
+  },
+  {
+    "emailId": "MAIL-022",
+    "type": "IRRELEVANT",
+    "personIds": [],
+    "movementId": null,
+    "contractId": null,
+    "effectiveFrom": null,
+    "effectiveUntil": null,
+    "approver": null,
+    "quote": null
+  }
+]

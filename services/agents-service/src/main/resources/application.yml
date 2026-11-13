@@ -1,0 +1,38 @@
+server:
+  port: ${PORT:8086}
+
+spring:
+  application:
+    name: agents-service
+  ai:
+    openai:
+      # Valor de relleno para poder arrancar sin clave (modo recorded). En live sin clave se usa el respaldo.
+      api-key: ${OPENAI_API_KEY:sin-clave}
+      base-url: ${OPENAI_BASE_URL:https://api.openai.com}
+      chat:
+        options:
+          model: ${OPENAI_MODEL:gpt-4o-mini}
+          temperature: 0
+    retry:
+      # Un solo intento: el tiempo máximo de espera lo controla agents.llm.timeout-seconds.
+      max-attempts: 1
+  autoconfigure:
+    # Solo se usa el modelo de chat; el resto de modelos de OpenAI no se configura.
+    exclude:
+      - org.springframework.ai.model.openai.autoconfigure.OpenAiEmbeddingAutoConfiguration
+      - org.springframework.ai.model.openai.autoconfigure.OpenAiImageAutoConfiguration
+      - org.springframework.ai.model.openai.autoconfigure.OpenAiAudioSpeechAutoConfiguration
+      - org.springframework.ai.model.openai.autoconfigure.OpenAiAudioTranscriptionAutoConfiguration
+      - org.springframework.ai.model.openai.autoconfigure.OpenAiModerationAutoConfiguration
+
+agents:
+  # live | recorded. En recorded nunca se llama al modelo.
+  mode: ${AGENTS_MODE:recorded}
+  llm:
+    timeout-seconds: 20
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health

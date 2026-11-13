@@ -19,8 +19,7 @@ import java.util.Optional;
 @ApplicationScoped
 public class IngestionService implements IngestionUseCase {
 
-    private static final List<String> PENDING_SOURCES = List.of("JIRA", "INVENTORY", "MOVIPER", "PROVIDER_ACT",
-            "STAFFING_PORTAL", "RECRUITMENT", "EMAIL");
+    private static final List<String> PENDING_SOURCES = List.of();
 
     @Inject
     Instance<SourceReaderPort> readers;

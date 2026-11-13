@@ -1,0 +1,11 @@
+# Perfil para correr sin Docker: H2 en memoria y conciliación al arrancar.
+spring:
+  datasource:
+    url: jdbc:h2:mem:cases;MODE=PostgreSQL;DB_CLOSE_DELAY=-1;INIT=CREATE SCHEMA IF NOT EXISTS cases
+    username: sa
+    password:
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+cases:
+  reconcile-on-startup: ${CASES_RECONCILE_ON_STARTUP:true}

@@ -1,0 +1,1307 @@
+[
+ {
+  "id": "CLM-0001",
+  "personId": "G40001",
+  "personName": "Carlos Benites",
+  "personRole": "Gerente de Área",
+  "subject": "ORG_MEMBERSHIP",
+  "value": "Gerencia CIO",
+  "attributes": {},
+  "source": "SIGA",
+  "sourceRef": "SIGA:G40001",
+  "observedAt": "2026-11-13T08:00:00Z",
+  "recordedAt": "2026-11-13T08:00:00Z",
+  "recordedBy": "ingestion-service",
+  "evidence": []
+ },
+ {
+  "id": "CLM-0002",
+  "personId": "C30001",
+  "personName": "Julia Meza",
+  "personRole": "Chapter Area Lead",
+  "subject": "MANAGEMENT_RESPONSIBILITY",
+  "value": "G40001",
+  "attributes": {
+   "managerName": "Carlos Benites"
+  },
+  "source": "SIGA",
+  "sourceRef": "SIGA:C30001",
+  "observedAt": "2026-11-13T08:00:00Z",
+  "recordedAt": "2026-11-13T08:00:00Z",
+  "recordedBy": "ingestion-service",
+  "evidence": []
+ },
+ {
+  "id": "CLM-0003",
+  "personId": "L20001",
+  "personName": "Rosa Díaz",
+  "personRole": "Chapter Lead",
+  "subject": "MANAGEMENT_RESPONSIBILITY",
+  "value": "C30001",
+  "attributes": {
+   "managerName": "Julia Meza"
+  },
+  "source": "SIGA",
+  "sourceRef": "SIGA:L20001",
+  "observedAt": "2026-11-13T08:00:00Z",
+  "recordedAt": "2026-11-13T08:00:00Z",
+  "recordedBy": "ingestion-service",
+  "evidence": []
+ },
+ {
+  "id": "CLM-0004",
+  "personId": "L20002",
+  "personName": "Pedro Alva",
+  "personRole": "Chapter Lead",
+  "subject": "MANAGEMENT_RESPONSIBILITY",
+  "value": "G40001",
+  "attributes": {
+   "managerName": "Carlos Benites"
+  },
+  "source": "SIGA",
+  "sourceRef": "SIGA:L20002",
+  "observedAt": "2026-11-13T08:00:00Z",
+  "recordedAt": "2026-11-13T08:00:00Z",
+  "recordedBy": "ingestion-service",
+  "evidence": []
+ },
+ {
+  "id": "CLM-0005",
+  "personId": "U10001",
+  "personName": "Ana Torres",
+  "personRole": "Backend Developer",
+  "subject": "ORG_MEMBERSHIP",
+  "value": "Pagos",
+  "attributes": {},
+  "source": "SIGA",
+  "sourceRef": "SIGA:U10001",
+  "observedAt": "2026-11-13T08:00:00Z",
+  "recordedAt": "2026-11-13T08:00:00Z",
+  "recordedBy": "ingestion-service",
+  "evidence": []
+ },
+ {
+  "id": "CLM-0006",
+  "personId": "U10001",
+  "personName": "Ana Torres",
+  "personRole": "Backend Developer",
+  "subject": "MANAGEMENT_RESPONSIBILITY",
+  "value": "L20001",
+  "attributes": {
+   "managerName": "Rosa Díaz"
+  },
+  "source": "SIGA",
+  "sourceRef": "SIGA:U10001",
+  "observedAt": "2026-11-13T08:00:00Z",
+  "recordedAt": "2026-11-13T08:00:00Z",
+  "recordedBy": "ingestion-service",
+  "evidence": []
+ },
+ {
+  "id": "CLM-0007",
+  "personId": "U10001",
+  "personName": "Ana Torres",
+  "personRole": "Backend Developer",
+  "subject": "BUDGET_ORIGIN",
+  "value": "Pagos",
+  "attributes": {},
+  "source": "PREPER",
+  "sourceRef": "PREPER:U10001",
+  "observedAt": "2026-11-13T08:00:00Z",
+  "recordedAt": "2026-11-13T08:00:00Z",
+  "recordedBy": "ingestion-service",
+  "evidence": []
+ },
+ {
+  "id": "CLM-0008",
+  "personId": "U10001",
+  "personName": "Ana Torres",
+  "personRole": "Backend Developer",
+  "subject": "OPERATIONAL_ASSIGNMENT",
+  "value": "Canales Digitales",
+  "attributes": {
+   "squad": "Squad Onboarding"
+  },
+  "source": "JIRA",
+  "sourceRef": "JIRA:U10001",
+  "observedAt": "2026-11-13T08:00:00Z",
+  "recordedAt": "2026-11-13T08:00:00Z",
+  "recordedBy": "ingestion-service",
+  "evidence": []
+ },
+ {
+  "id": "CLM-0009",
+  "personId": "U10002",
+  "personName": "Luis Ramos",
+  "personRole": "QA Engineer",
+  "subject": "ORG_MEMBERSHIP",
+  "value": "Pagos",
+  "attributes": {},
+  "source": "SIGA",
+  "sourceRef": "SIGA:U10002",
+  "observedAt": "2026-11-13T08:00:00Z",
+  "recordedAt": "2026-11-13T08:00:00Z",
+  "recordedBy": "ingestion-service",
+  "evidence": []
+ },
+ {
+  "id": "CLM-0010",
+  "personId": "U10002",
+  "personName": "Luis Ramos",
+  "personRole": "QA Engineer",
+  "subject": "MANAGEMENT_RESPONSIBILITY",
+  "value": "L20001",
+  "attributes": {
+   "managerName": "Rosa Díaz"
+  },
+  "source": "SIGA",
+  "sourceRef": "SIGA:U10002",
+  "observedAt": "2026-11-13T08:00:00Z",
+  "recordedAt": "2026-11-13T08:00:00Z",
+  "recordedBy": "ingestion-service",
+  "evidence": []
+ },
+ {
+  "id": "CLM-0011",
+  "personId": "U10002",
+  "personName": "Luis Ramos",
+  "personRole": "QA Engineer",
+  "subject": "BUDGET_ORIGIN",
+  "value": "Riesgos",
+  "attributes": {},
+  "source": "PREPER",
+  "sourceRef": "PREPER:U10002",
+  "observedAt": "2026-11-13T08:00:00Z",
+  "recordedAt": "2026-11-13T08:00:00Z",
+  "recordedBy": "ingestion-service",
+  "evidence": []
+ },
+ {
+  "id": "CLM-0012",
+  "personId": "U10002",
+  "personName": "Luis Ramos",
+  "personRole": "QA Engineer",
+  "subject": "OPERATIONAL_ASSIGNMENT",
+  "value": "Riesgos",
+  "attributes": {
+   "squad": "Squad Scoring"
+  },
+  "source": "JIRA",
+  "sourceRef": "JIRA:U10002",
+  "observedAt": "2026-11-13T08:00:00Z",
+  "recordedAt": "2026-11-13T08:00:00Z",
+  "recordedBy": "ingestion-service",
+  "evidence": []
+ },
+ {
+  "id": "CLM-0013",
+  "personId": "U10002",
+  "personName": "Luis Ramos",
+  "personRole": "QA Engineer",
+  "subject": "MOVEMENT",
+  "value": "MOV-102",
+  "attributes": {
+   "type": "MOVE",
+   "fromTribe": "Pagos",
+   "toTribe": "Riesgos",
+   "status": "APPROVED"
+  },
+  "source": "EXCEL_MOVEMENTS",
+  "sourceRef": "MOV-102",
+  "observedAt": "2026-11-13T08:00:00Z",
+  "recordedAt": "2026-11-13T08:00:00Z",
+  "recordedBy": "ingestion-service",
+  "evidence": [
+   {
+    "type": "MOVEMENT_APPROVAL",
+    "emailId": "MAIL-002",
+    "quote": "Apruebo el movimiento MOV-102 de Luis Ramos (U10002) a la tribu Riesgos desde el 15 de octubre.",
+    "approver": "C30001",
+    "personIds": [
+     "U10002"
+    ],
+    "date": "2026-10-10",
+    "aiGenerated": true
+   }
+  ],
+  "validFrom": "2026-10-15"
+ },
+ {
+  "id": "CLM-0014",
+  "personId": "U10003",
+  "personName": "Carla Mendoza",
+  "personRole": "Data Engineer",
+  "subject": "ORG_MEMBERSHIP",
+  "value": "Data",
+  "attributes": {},
+  "source": "SIGA",
+  "sourceRef": "SIGA:U10003",
+  "observedAt": "2026-11-13T08:00:00Z",
+  "recordedAt": "2026-11-13T08:00:00Z",
+  "recordedBy": "ingestion-service",
+  "evidence": []
+ },
+ {
+  "id": "CLM-0015",
+  "personId": "U10003",
+  "personName": "Carla Mendoza",
+  "personRole": "Data Engineer",
+  "subject": "MANAGEMENT_RESPONSIBILITY",
+  "value": "L20001",
+  "attributes": {
+   "managerName": "Rosa Díaz"
+  },
+  "source": "SIGA",
+  "sourceRef": "SIGA:U10003",
+  "observedAt": "2026-11-13T08:00:00Z",
+  "recordedAt": "2026-11-13T08:00:00Z",
+  "recordedBy": "ingestion-service",
+  "evidence": []
+ },
+ {
+  "id": "CLM-0016",
+  "personId": "U10003",
+  "personName": "Carla Mendoza",
+  "personRole": "Data Engineer",
+  "subject": "BUDGET_ORIGIN",
+  "value": "Data",
+  "attributes": {},
+  "source": "PREPER",
+  "sourceRef": "PREPER:U10003",
+  "observedAt": "2026-11-13T08:00:00Z",
+  "recordedAt": "2026-11-13T08:00:00Z",
+  "recordedBy": "ingestion-service",
+  "evidence": []
+ },
+ {
+  "id": "CLM-0017",
+  "personId": "U10003",
+  "personName": "Carla Mendoza",
+  "personRole": "Data Engineer",
+  "subject": "OPERATIONAL_ASSIGNMENT",
+  "value": "Data",
+  "attributes": {
+   "squad": "Squad Lakehouse"
+  },
+  "source": "JIRA",
+  "sourceRef": "JIRA:U10003",
+  "observedAt": "2026-11-13T08:00:00Z",
+  "recordedAt": "2026-11-13T08:00:00Z",
+  "recordedBy": "ingestion-service",
+  "evidence": []
+ },
+ {
+  "id": "CLM-0018",
+  "personId": "U10003",
+  "personName": "Carla Mendoza",
+  "personRole": "Data Engineer",
+  "subject": "MANAGEMENT_RESPONSIBILITY",
+  "value": "L20002",
+  "attributes": {
+   "managerName": "Pedro Alva"
+  },
+  "source": "EXCEL_CHAPTER",
+  "sourceRef": "chapters.xlsx#U10003",
+  "observedAt": "2026-11-13T08:00:00Z",
+  "recordedAt": "2026-11-13T08:00:00Z",
+  "recordedBy": "ingestion-service",
+  "evidence": []
+ },
+ {
+  "id": "CLM-0019",
+  "personId": "U10004",
+  "personName": "Diego Paredes",
+  "personRole": "Frontend Developer",
+  "subject": "ORG_MEMBERSHIP",
+  "value": "Canales Digitales",
+  "attributes": {},
+  "source": "SIGA",
+  "sourceRef": "SIGA:U10004",
+  "observedAt": "2026-11-13T08:00:00Z",
+  "recordedAt": "2026-11-13T08:00:00Z",
+  "recordedBy": "ingestion-service",
+  "evidence": []
+ },
+ {
+  "id": "CLM-0020",
+  "personId": "U10004",
+  "personName": "Diego Paredes",
+  "personRole": "Frontend Developer",
+  "subject": "MANAGEMENT_RESPONSIBILITY",
+  "value": "L20002",
+  "attributes": {
+   "managerName": "Pedro Alva"
+  },
+  "source": "SIGA",
+  "sourceRef": "SIGA:U10004",
+  "observedAt": "2026-11-13T08:00:00Z",
+  "recordedAt": "2026-11-13T08:00:00Z",
+  "recordedBy": "ingestion-service",
+  "evidence": []
+ },
+ {
+  "id": "CLM-0021",
+  "personId": "U10004",
+  "personName": "Diego Paredes",
+  "personRole": "Frontend Developer",
+  "subject": "BUDGET_ORIGIN",
+  "value": "Canales Digitales",
+  "attributes": {},
+  "source": "PREPER",
+  "sourceRef": "PREPER:U10004",
+  "observedAt": "2026-11-13T08:00:00Z",
+  "recordedAt": "2026-11-13T08:00:00Z",
+  "recordedBy": "ingestion-service",
+  "evidence": []
+ },
+ {
+  "id": "CLM-0022",
+  "personId": "U10004",
+  "personName": "Diego Paredes",
+  "personRole": "Frontend Developer",
+  "subject": "OPERATIONAL_ASSIGNMENT",
+  "value": "Canales Digitales",
+  "attributes": {
+   "squad": "Squad App Móvil"
+  },
+  "source": "JIRA",
+  "sourceRef": "JIRA:U10004",
+  "observedAt": "2026-11-13T08:00:00Z",
+  "recordedAt": "2026-11-13T08:00:00Z",
+  "recordedBy": "ingestion-service",
+  "evidence": []
+ },
+ {
+  "id": "CLM-0023",
+  "personId": "U10004",
+  "personName": "Diego Paredes",
+  "personRole": "Frontend Developer",
+  "subject": "MOVEMENT",
+  "value": "MOV-104",
+  "attributes": {
+   "type": "MOVE",
+   "fromTribe": "Canales Digitales",
+   "toTribe": "Pagos",
+   "status": "APPROVED"
+  },
+  "source": "EXCEL_MOVEMENTS",
+  "sourceRef": "MOV-104",
+  "observedAt": "2026-11-13T08:00:00Z",
+  "recordedAt": "2026-11-13T08:00:00Z",
+  "recordedBy": "ingestion-service",
+  "evidence": [],
+  "validFrom": "2026-12-01"
+ },
+ {
+  "id": "CLM-0024",
+  "personId": "U10005",
+  "personName": "Sofía Vega",
+  "personRole": "Backend Developer",
+  "subject": "ORG_MEMBERSHIP",
+  "value": "Pagos",
+  "attributes": {},
+  "source": "SIGA",
+  "sourceRef": "SIGA:U10005",
+  "observedAt": "2026-11-13T08:00:00Z",
+  "recordedAt": "2026-11-13T08:00:00Z",
+  "recordedBy": "ingestion-service",
+  "evidence": []
+ },
+ {
+  "id": "CLM-0025",
+  "personId": "U10005",
+  "personName": "Sofía Vega",
+  "personRole": "Backend Developer",
+  "subject": "MANAGEMENT_RESPONSIBILITY",
+  "value": "L20002",
+  "attributes": {
+   "managerName": "Pedro Alva"
+  },
+  "source": "SIGA",
+  "sourceRef": "SIGA:U10005",
+  "observedAt": "2026-11-13T08:00:00Z",
+  "recordedAt": "2026-11-13T08:00:00Z",
+  "recordedBy": "ingestion-service",
+  "evidence": []
+ },
+ {
+  "id": "CLM-0026",
+  "personId": "U10005",
+  "personName": "Sofía Vega",
+  "personRole": "Backend Developer",
+  "subject": "BUDGET_ORIGIN",
+  "value": "Pagos",
+  "attributes": {},
+  "source": "PREPER",
+  "sourceRef": "PREPER:U10005",
+  "observedAt": "2026-11-13T08:00:00Z",
+  "recordedAt": "2026-11-13T08:00:00Z",
+  "recordedBy": "ingestion-service",
+  "evidence": []
+ },
+ {
+  "id": "CLM-0027",
+  "personId": "U10005",
+  "personName": "Sofía Vega",
+  "personRole": "Backend Developer",
+  "subject": "OPERATIONAL_ASSIGNMENT",
+  "value": "Pagos",
+  "attributes": {
+   "squad": "Squad Transferencias"
+  },
+  "source": "JIRA",
+  "sourceRef": "JIRA:U10005",
+  "observedAt": "2026-11-13T08:00:00Z",
+  "recordedAt": "2026-11-13T08:00:00Z",
+  "recordedBy": "ingestion-service",
+  "evidence": []
+ },
+ {
+  "id": "CLM-0028",
+  "personId": "U10006",
+  "personName": "Marco Ríos",
+  "personRole": "Backend Developer",
+  "subject": "ORG_MEMBERSHIP",
+  "value": "Riesgos",
+  "attributes": {},
+  "source": "SIGA",
+  "sourceRef": "SIGA:U10006",
+  "observedAt": "2026-11-13T08:00:00Z",
+  "recordedAt": "2026-11-13T08:00:00Z",
+  "recordedBy": "ingestion-service",
+  "evidence": []
+ },
+ {
+  "id": "CLM-0029",
+  "personId": "U10006",
+  "personName": "Marco Ríos",
+  "personRole": "Backend Developer",
+  "subject": "MANAGEMENT_RESPONSIBILITY",
+  "value": "L20001",
+  "attributes": {
+   "managerName": "Rosa Díaz"
+  },
+  "source": "SIGA",
+  "sourceRef": "SIGA:U10006",
+  "observedAt": "2026-11-13T08:00:00Z",
+  "recordedAt": "2026-11-13T08:00:00Z",
+  "recordedBy": "ingestion-service",
+  "evidence": []
+ },
+ {
+  "id": "CLM-0030",
+  "personId": "U10006",
+  "personName": "Marco Ríos",
+  "personRole": "Backend Developer",
+  "subject": "BUDGET_ORIGIN",
+  "value": "Riesgos",
+  "attributes": {},
+  "source": "PREPER",
+  "sourceRef": "PREPER:U10006",
+  "observedAt": "2026-11-13T08:00:00Z",
+  "recordedAt": "2026-11-13T08:00:00Z",
+  "recordedBy": "ingestion-service",
+  "evidence": []
+ },
+ {
+  "id": "CLM-0031",
+  "personId": "U10006",
+  "personName": "Marco Ríos",
+  "personRole": "Backend Developer",
+  "subject": "OPERATIONAL_ASSIGNMENT",
+  "value": "Riesgos",
+  "attributes": {
+   "squad": "Squad Fraude"
+  },
+  "source": "JIRA",
+  "sourceRef": "JIRA:U10006",
+  "observedAt": "2026-11-13T08:00:00Z",
+  "recordedAt": "2026-11-13T08:00:00Z",
+  "recordedBy": "ingestion-service",
+  "evidence": []
+ },
+ {
+  "id": "CLM-0032",
+  "personId": "U10005",
+  "personName": "Sofía Vega",
+  "personRole": "Backend Developer",
+  "subject": "MOVEMENT",
+  "value": "ENR-201",
+  "attributes": {
+   "type": "SWAP",
+   "fromTribe": "Pagos",
+   "toTribe": "Riesgos",
+   "status": "REQUESTED",
+   "counterpartId": "U10006"
+  },
+  "source": "EXCEL_MOVEMENTS",
+  "sourceRef": "ENR-201",
+  "observedAt": "2026-11-13T08:00:00Z",
+  "recordedAt": "2026-11-13T08:00:00Z",
+  "recordedBy": "ingestion-service",
+  "evidence": [
+   {
+    "type": "SWAP_CONFORMITY",
+    "emailId": "MAIL-005",
+    "quote": "Doy mi conformidad al enroque ENR-201 entre Sofía Vega (U10005) y Marco Ríos (U10006).",
+    "approver": "L20002",
+    "personIds": [
+     "U10005",
+     "U10006"
+    ],
+    "date": "2026-11-05",
+    "aiGenerated": true
+   }
+  ],
+  "validFrom": "2026-12-01"
+ },
+ {
+  "id": "CLM-0033",
+  "personId": "U10006",
+  "personName": "Marco Ríos",
+  "personRole": "Backend Developer",
+  "subject": "MOVEMENT",
+  "value": "ENR-201",
+  "attributes": {
+   "type": "SWAP",
+   "fromTribe": "Riesgos",
+   "toTribe": "Pagos",
+   "status": "REQUESTED",
+   "counterpartId": "U10005"
+  },
+  "source": "EXCEL_MOVEMENTS",
+  "sourceRef": "ENR-201",
+  "observedAt": "2026-11-13T08:00:00Z",
+  "recordedAt": "2026-11-13T08:00:00Z",
+  "recordedBy": "ingestion-service",
+  "evidence": [
+   {
+    "type": "SWAP_CONFORMITY",
+    "emailId": "MAIL-005",
+    "quote": "Doy mi conformidad al enroque ENR-201 entre Sofía Vega (U10005) y Marco Ríos (U10006).",
+    "approver": "L20002",
+    "personIds": [
+     "U10005",
+     "U10006"
+    ],
+    "date": "2026-11-05",
+    "aiGenerated": true
+   }
+  ],
+  "validFrom": "2026-12-01"
+ },
+ {
+  "id": "CLM-0034",
+  "personId": "U10007",
+  "personName": "Jorge Salas",
+  "personRole": "DevOps Engineer",
+  "subject": "ORG_MEMBERSHIP",
+  "value": "Canales Digitales",
+  "attributes": {},
+  "source": "SIGA",
+  "sourceRef": "SIGA:U10007",
+  "observedAt": "2026-11-13T08:00:00Z",
+  "recordedAt": "2026-11-13T08:00:00Z",
+  "recordedBy": "ingestion-service",
+  "evidence": []
+ },
+ {
+  "id": "CLM-0035",
+  "personId": "U10007",
+  "personName": "Jorge Salas",
+  "personRole": "DevOps Engineer",
+  "subject": "MANAGEMENT_RESPONSIBILITY",
+  "value": "L20002",
+  "attributes": {
+   "managerName": "Pedro Alva"
+  },
+  "source": "SIGA",
+  "sourceRef": "SIGA:U10007",
+  "observedAt": "2026-11-13T08:00:00Z",
+  "recordedAt": "2026-11-13T08:00:00Z",
+  "recordedBy": "ingestion-service",
+  "evidence": []
+ },
+ {
+  "id": "CLM-0036",
+  "personId": "U10007",
+  "personName": "Jorge Salas",
+  "personRole": "DevOps Engineer",
+  "subject": "BUDGET_ORIGIN",
+  "value": "Canales Digitales",
+  "attributes": {},
+  "source": "PREPER",
+  "sourceRef": "PREPER:U10007",
+  "observedAt": "2026-11-13T08:00:00Z",
+  "recordedAt": "2026-11-13T08:00:00Z",
+  "recordedBy": "ingestion-service",
+  "evidence": []
+ },
+ {
+  "id": "CLM-0037",
+  "personId": "U10007",
+  "personName": "Jorge Salas",
+  "personRole": "DevOps Engineer",
+  "subject": "OPERATIONAL_ASSIGNMENT",
+  "value": "Canales Digitales",
+  "attributes": {
+   "squad": "Squad Plataforma"
+  },
+  "source": "JIRA",
+  "sourceRef": "JIRA:U10007",
+  "observedAt": "2026-11-13T08:00:00Z",
+  "recordedAt": "2026-11-13T08:00:00Z",
+  "recordedBy": "ingestion-service",
+  "evidence": []
+ },
+ {
+  "id": "CLM-0038",
+  "personId": "U10007",
+  "personName": "Jorge Salas",
+  "personRole": "DevOps Engineer",
+  "subject": "CONTRACT",
+  "value": "ACT-301",
+  "attributes": {
+   "provider": "TechPerú SAC"
+  },
+  "source": "EXCEL_CONTRACTS",
+  "sourceRef": "ACT-301",
+  "observedAt": "2026-11-13T08:00:00Z",
+  "recordedAt": "2026-11-13T08:00:00Z",
+  "recordedBy": "ingestion-service",
+  "evidence": [],
+  "validFrom": "2026-06-01",
+  "validUntil": "2026-11-30"
+ },
+ {
+  "id": "CLM-0039",
+  "personId": "U10008",
+  "personName": "Paola Quispe",
+  "personRole": "Scrum Master",
+  "subject": "ORG_MEMBERSHIP",
+  "value": "Pagos",
+  "attributes": {},
+  "source": "SIGA",
+  "sourceRef": "SIGA:U10008",
+  "observedAt": "2026-11-13T08:00:00Z",
+  "recordedAt": "2026-11-13T08:00:00Z",
+  "recordedBy": "ingestion-service",
+  "evidence": []
+ },
+ {
+  "id": "CLM-0040",
+  "personId": "U10008",
+  "personName": "Paola Quispe",
+  "personRole": "Scrum Master",
+  "subject": "MANAGEMENT_RESPONSIBILITY",
+  "value": "L20001",
+  "attributes": {
+   "managerName": "Rosa Díaz"
+  },
+  "source": "SIGA",
+  "sourceRef": "SIGA:U10008",
+  "observedAt": "2026-11-13T08:00:00Z",
+  "recordedAt": "2026-11-13T08:00:00Z",
+  "recordedBy": "ingestion-service",
+  "evidence": []
+ },
+ {
+  "id": "CLM-0041",
+  "personId": "U10008",
+  "personName": "Paola Quispe",
+  "personRole": "Scrum Master",
+  "subject": "BUDGET_ORIGIN",
+  "value": "Pagos",
+  "attributes": {},
+  "source": "PREPER",
+  "sourceRef": "PREPER:U10008",
+  "observedAt": "2026-11-13T08:00:00Z",
+  "recordedAt": "2026-11-13T08:00:00Z",
+  "recordedBy": "ingestion-service",
+  "evidence": []
+ },
+ {
+  "id": "CLM-0042",
+  "personId": "U10008",
+  "personName": "Paola Quispe",
+  "personRole": "Scrum Master",
+  "subject": "OPERATIONAL_ASSIGNMENT",
+  "value": "Pagos",
+  "attributes": {
+   "squad": "Squad Cobranzas"
+  },
+  "source": "JIRA",
+  "sourceRef": "JIRA:U10008",
+  "observedAt": "2026-11-13T08:00:00Z",
+  "recordedAt": "2026-11-13T08:00:00Z",
+  "recordedBy": "ingestion-service",
+  "evidence": []
+ },
+ {
+  "id": "CLM-0043",
+  "personId": "U10008",
+  "personName": "Paola Quispe",
+  "personRole": "Scrum Master",
+  "subject": "AVAILABILITY",
+  "value": "PLANNED",
+  "attributes": {
+   "reason": "Fin de asignación en Squad Cobranzas"
+  },
+  "source": "JIRA",
+  "sourceRef": "JIRA:U10008",
+  "observedAt": "2026-11-13T08:00:00Z",
+  "recordedAt": "2026-11-13T08:00:00Z",
+  "recordedBy": "ingestion-service",
+  "evidence": [],
+  "validFrom": "2026-11-25"
+ },
+ {
+  "id": "CLM-0044",
+  "personId": "U10009",
+  "personName": "Renzo Flores",
+  "personRole": "Backend Developer",
+  "subject": "ORG_MEMBERSHIP",
+  "value": "Data",
+  "attributes": {},
+  "source": "SIGA",
+  "sourceRef": "SIGA:U10009",
+  "observedAt": "2026-11-13T08:00:00Z",
+  "recordedAt": "2026-11-13T08:00:00Z",
+  "recordedBy": "ingestion-service",
+  "evidence": []
+ },
+ {
+  "id": "CLM-0045",
+  "personId": "U10009",
+  "personName": "Renzo Flores",
+  "personRole": "Backend Developer",
+  "subject": "MANAGEMENT_RESPONSIBILITY",
+  "value": "L20002",
+  "attributes": {
+   "managerName": "Pedro Alva"
+  },
+  "source": "SIGA",
+  "sourceRef": "SIGA:U10009",
+  "observedAt": "2026-11-13T08:00:00Z",
+  "recordedAt": "2026-11-13T08:00:00Z",
+  "recordedBy": "ingestion-service",
+  "evidence": []
+ },
+ {
+  "id": "CLM-0046",
+  "personId": "U10009",
+  "personName": "Renzo Flores",
+  "personRole": "Backend Developer",
+  "subject": "BUDGET_ORIGIN",
+  "value": "Data",
+  "attributes": {},
+  "source": "PREPER",
+  "sourceRef": "PREPER:U10009",
+  "observedAt": "2026-11-13T08:00:00Z",
+  "recordedAt": "2026-11-13T08:00:00Z",
+  "recordedBy": "ingestion-service",
+  "evidence": []
+ },
+ {
+  "id": "CLM-0047",
+  "personId": "U10009",
+  "personName": "Renzo Flores",
+  "personRole": "Backend Developer",
+  "subject": "OPERATIONAL_ASSIGNMENT",
+  "value": "Riesgos",
+  "attributes": {
+   "squad": "Squad Scoring"
+  },
+  "source": "JIRA",
+  "sourceRef": "JIRA:U10009",
+  "observedAt": "2026-11-13T08:00:00Z",
+  "recordedAt": "2026-11-13T08:00:00Z",
+  "recordedBy": "ingestion-service",
+  "evidence": []
+ },
+ {
+  "id": "CLM-0048",
+  "personId": "U10009",
+  "personName": "Renzo Flores",
+  "personRole": "Backend Developer",
+  "subject": "TEMP_SUPPORT",
+  "value": "Riesgos",
+  "attributes": {},
+  "source": "EXCEL_SUPPORT",
+  "sourceRef": "APO-109",
+  "observedAt": "2026-11-13T08:00:00Z",
+  "recordedAt": "2026-11-13T08:00:00Z",
+  "recordedBy": "ingestion-service",
+  "evidence": [
+   {
+    "type": "TEMP_SUPPORT",
+    "emailId": "MAIL-009",
+    "quote": "Renzo Flores (U10009) apoyará a Riesgos hasta el 6 de noviembre.",
+    "approver": "L20002",
+    "personIds": [
+     "U10009"
+    ],
+    "date": "2026-07-28",
+    "aiGenerated": true
+   }
+  ],
+  "validFrom": "2026-08-01",
+  "validUntil": "2026-11-06"
+ },
+ {
+  "id": "CLM-0049",
+  "personId": "U10010",
+  "personName": "Elena Castro",
+  "personRole": "Frontend Developer",
+  "subject": "ORG_MEMBERSHIP",
+  "value": "Pagos",
+  "attributes": {},
+  "source": "SIGA",
+  "sourceRef": "SIGA:U10010",
+  "observedAt": "2026-11-13T08:00:00Z",
+  "recordedAt": "2026-11-13T08:00:00Z",
+  "recordedBy": "ingestion-service",
+  "evidence": []
+ },
+ {
+  "id": "CLM-0050",
+  "personId": "U10010",
+  "personName": "Elena Castro",
+  "personRole": "Frontend Developer",
+  "subject": "MANAGEMENT_RESPONSIBILITY",
+  "value": "L20001",
+  "attributes": {
+   "managerName": "Rosa Díaz"
+  },
+  "source": "SIGA",
+  "sourceRef": "SIGA:U10010",
+  "observedAt": "2026-11-13T08:00:00Z",
+  "recordedAt": "2026-11-13T08:00:00Z",
+  "recordedBy": "ingestion-service",
+  "evidence": []
+ },
+ {
+  "id": "CLM-0051",
+  "personId": "U10010",
+  "personName": "Elena Castro",
+  "personRole": "Frontend Developer",
+  "subject": "BUDGET_ORIGIN",
+  "value": "Pagos",
+  "attributes": {},
+  "source": "PREPER",
+  "sourceRef": "PREPER:U10010",
+  "observedAt": "2026-11-13T08:00:00Z",
+  "recordedAt": "2026-11-13T08:00:00Z",
+  "recordedBy": "ingestion-service",
+  "evidence": []
+ },
+ {
+  "id": "CLM-0052",
+  "personId": "U10010",
+  "personName": "Elena Castro",
+  "personRole": "Frontend Developer",
+  "subject": "OPERATIONAL_ASSIGNMENT",
+  "value": "Pagos",
+  "attributes": {
+   "squad": "Squad Transferencias"
+  },
+  "source": "JIRA",
+  "sourceRef": "JIRA:U10010",
+  "observedAt": "2026-11-13T08:00:00Z",
+  "recordedAt": "2026-11-13T08:00:00Z",
+  "recordedBy": "ingestion-service",
+  "evidence": []
+ },
+ {
+  "id": "CLM-0053",
+  "personId": "U10010",
+  "personName": "Elena Castro",
+  "personRole": "Frontend Developer",
+  "subject": "MOVEMENT",
+  "value": "MOV-110",
+  "attributes": {
+   "type": "MOVE",
+   "fromTribe": "Riesgos",
+   "toTribe": "Pagos",
+   "status": "APPROVED"
+  },
+  "source": "EXCEL_MOVEMENTS",
+  "sourceRef": "MOV-110",
+  "observedAt": "2026-11-13T08:00:00Z",
+  "recordedAt": "2026-11-13T08:00:00Z",
+  "recordedBy": "ingestion-service",
+  "evidence": [
+   {
+    "type": "MOVEMENT_APPROVAL",
+    "emailId": "MAIL-010",
+    "quote": "Aprobado el movimiento MOV-110 de Elena Castro (U10010) a Pagos.",
+    "approver": "C30001",
+    "personIds": [
+     "U10010"
+    ],
+    "date": "2026-08-25",
+    "aiGenerated": true
+   }
+  ],
+  "validFrom": "2026-09-01"
+ },
+ {
+  "id": "CLM-0054",
+  "personId": "U10010",
+  "personName": "Elena Castro",
+  "personRole": "Frontend Developer",
+  "subject": "CONTRACT",
+  "value": "ACT-310",
+  "attributes": {
+   "provider": "Andes Digital"
+  },
+  "source": "EXCEL_CONTRACTS",
+  "sourceRef": "ACT-310",
+  "observedAt": "2026-11-13T08:00:00Z",
+  "recordedAt": "2026-11-13T08:00:00Z",
+  "recordedBy": "ingestion-service",
+  "evidence": [],
+  "validFrom": "2026-04-01",
+  "validUntil": "2027-03-31"
+ },
+ {
+  "id": "CLM-0055",
+  "personId": "U10011",
+  "personName": "Hugo Lazo",
+  "personRole": "QA Engineer",
+  "subject": "ORG_MEMBERSHIP",
+  "value": "Canales Digitales",
+  "attributes": {},
+  "source": "SIGA",
+  "sourceRef": "SIGA:U10011",
+  "observedAt": "2026-11-13T08:00:00Z",
+  "recordedAt": "2026-11-13T08:00:00Z",
+  "recordedBy": "ingestion-service",
+  "evidence": []
+ },
+ {
+  "id": "CLM-0056",
+  "personId": "U10011",
+  "personName": "Hugo Lazo",
+  "personRole": "QA Engineer",
+  "subject": "MANAGEMENT_RESPONSIBILITY",
+  "value": "L20002",
+  "attributes": {
+   "managerName": "Pedro Alva"
+  },
+  "source": "SIGA",
+  "sourceRef": "SIGA:U10011",
+  "observedAt": "2026-11-13T08:00:00Z",
+  "recordedAt": "2026-11-13T08:00:00Z",
+  "recordedBy": "ingestion-service",
+  "evidence": []
+ },
+ {
+  "id": "CLM-0057",
+  "personId": "U10011",
+  "personName": "Hugo Lazo",
+  "personRole": "QA Engineer",
+  "subject": "BUDGET_ORIGIN",
+  "value": "Canales Digitales",
+  "attributes": {},
+  "source": "PREPER",
+  "sourceRef": "PREPER:U10011",
+  "observedAt": "2026-11-13T08:00:00Z",
+  "recordedAt": "2026-11-13T08:00:00Z",
+  "recordedBy": "ingestion-service",
+  "evidence": []
+ },
+ {
+  "id": "CLM-0058",
+  "personId": "U10011",
+  "personName": "Hugo Lazo",
+  "personRole": "QA Engineer",
+  "subject": "OPERATIONAL_ASSIGNMENT",
+  "value": "Canales Digitales",
+  "attributes": {
+   "squad": "Squad App Móvil"
+  },
+  "source": "JIRA",
+  "sourceRef": "JIRA:U10011",
+  "observedAt": "2026-11-13T08:00:00Z",
+  "recordedAt": "2026-11-13T08:00:00Z",
+  "recordedBy": "ingestion-service",
+  "evidence": []
+ },
+ {
+  "id": "CLM-0059",
+  "personId": "U10011",
+  "personName": "Hugo Lazo",
+  "personRole": "QA Engineer",
+  "subject": "CONTRACT",
+  "value": "ACT-311",
+  "attributes": {
+   "provider": "TechPerú SAC"
+  },
+  "source": "EXCEL_CONTRACTS",
+  "sourceRef": "ACT-311",
+  "observedAt": "2026-11-13T08:00:00Z",
+  "recordedAt": "2026-11-13T08:00:00Z",
+  "recordedBy": "ingestion-service",
+  "evidence": [
+   {
+    "type": "CONTRACT_RENEWAL",
+    "emailId": "MAIL-011",
+    "quote": "Se renueva el acta ACT-311 de Hugo Lazo (U10011) por seis meses más.",
+    "approver": "L20002",
+    "personIds": [
+     "U10011"
+    ],
+    "date": "2026-11-03",
+    "aiGenerated": true
+   }
+  ],
+  "validFrom": "2026-05-29",
+  "validUntil": "2026-11-28"
+ },
+ {
+  "id": "CLM-0060",
+  "personId": "U10012",
+  "personName": "Marta Ruiz",
+  "personRole": "Data Engineer",
+  "subject": "ORG_MEMBERSHIP",
+  "value": "Data",
+  "attributes": {},
+  "source": "SIGA",
+  "sourceRef": "SIGA:U10012",
+  "observedAt": "2026-11-13T08:00:00Z",
+  "recordedAt": "2026-11-13T08:00:00Z",
+  "recordedBy": "ingestion-service",
+  "evidence": []
+ },
+ {
+  "id": "CLM-0061",
+  "personId": "U10012",
+  "personName": "Marta Ruiz",
+  "personRole": "Data Engineer",
+  "subject": "MANAGEMENT_RESPONSIBILITY",
+  "value": "L20001",
+  "attributes": {
+   "managerName": "Rosa Díaz"
+  },
+  "source": "SIGA",
+  "sourceRef": "SIGA:U10012",
+  "observedAt": "2026-11-13T08:00:00Z",
+  "recordedAt": "2026-11-13T08:00:00Z",
+  "recordedBy": "ingestion-service",
+  "evidence": []
+ },
+ {
+  "id": "CLM-0062",
+  "personId": "U10012",
+  "personName": "Marta Ruiz",
+  "personRole": "Data Engineer",
+  "subject": "BUDGET_ORIGIN",
+  "value": "Data",
+  "attributes": {},
+  "source": "PREPER",
+  "sourceRef": "PREPER:U10012",
+  "observedAt": "2026-11-13T08:00:00Z",
+  "recordedAt": "2026-11-13T08:00:00Z",
+  "recordedBy": "ingestion-service",
+  "evidence": []
+ },
+ {
+  "id": "CLM-0063",
+  "personId": "U10012",
+  "personName": "Marta Ruiz",
+  "personRole": "Data Engineer",
+  "subject": "OPERATIONAL_ASSIGNMENT",
+  "value": "Data",
+  "attributes": {
+   "squad": "Squad Lakehouse"
+  },
+  "source": "JIRA",
+  "sourceRef": "JIRA:U10012",
+  "observedAt": "2026-11-13T08:00:00Z",
+  "recordedAt": "2026-11-13T08:00:00Z",
+  "recordedBy": "ingestion-service",
+  "evidence": []
+ },
+ {
+  "id": "CLM-0064",
+  "personId": "U10012",
+  "personName": "Marta Ruiz",
+  "personRole": "Data Engineer",
+  "subject": "AVAILABILITY",
+  "value": "CONFIRMED",
+  "attributes": {
+   "reason": "Fin de proyecto Lakehouse"
+  },
+  "source": "DECISION",
+  "sourceRef": "seed",
+  "observedAt": "2026-11-13T08:00:00Z",
+  "recordedAt": "2026-11-13T08:00:00Z",
+  "recordedBy": "ingestion-service",
+  "evidence": [],
+  "validFrom": "2026-11-20"
+ },
+ {
+  "id": "CLM-0065",
+  "personId": "U10013",
+  "personName": "Iván Soto",
+  "personRole": "DevOps Engineer",
+  "subject": "ORG_MEMBERSHIP",
+  "value": "Canales Digitales",
+  "attributes": {},
+  "source": "SIGA",
+  "sourceRef": "SIGA:U10013",
+  "observedAt": "2026-11-13T08:00:00Z",
+  "recordedAt": "2026-11-13T08:00:00Z",
+  "recordedBy": "ingestion-service",
+  "evidence": []
+ },
+ {
+  "id": "CLM-0066",
+  "personId": "U10013",
+  "personName": "Iván Soto",
+  "personRole": "DevOps Engineer",
+  "subject": "MANAGEMENT_RESPONSIBILITY",
+  "value": "L20002",
+  "attributes": {
+   "managerName": "Pedro Alva"
+  },
+  "source": "SIGA",
+  "sourceRef": "SIGA:U10013",
+  "observedAt": "2026-11-13T08:00:00Z",
+  "recordedAt": "2026-11-13T08:00:00Z",
+  "recordedBy": "ingestion-service",
+  "evidence": []
+ },
+ {
+  "id": "CLM-0067",
+  "personId": "U10013",
+  "personName": "Iván Soto",
+  "personRole": "DevOps Engineer",
+  "subject": "BUDGET_ORIGIN",
+  "value": "Canales Digitales",
+  "attributes": {},
+  "source": "PREPER",
+  "sourceRef": "PREPER:U10013",
+  "observedAt": "2026-11-13T08:00:00Z",
+  "recordedAt": "2026-11-13T08:00:00Z",
+  "recordedBy": "ingestion-service",
+  "evidence": []
+ },
+ {
+  "id": "CLM-0068",
+  "personId": "U10013",
+  "personName": "Iván Soto",
+  "personRole": "DevOps Engineer",
+  "subject": "OPERATIONAL_ASSIGNMENT",
+  "value": "Pagos",
+  "attributes": {
+   "squad": "Squad Cobranzas"
+  },
+  "source": "JIRA",
+  "sourceRef": "JIRA:U10013",
+  "observedAt": "2026-11-13T08:00:00Z",
+  "recordedAt": "2026-11-13T08:00:00Z",
+  "recordedBy": "ingestion-service",
+  "evidence": []
+ },
+ {
+  "id": "CLM-0069",
+  "personId": "U10013",
+  "personName": "Iván Soto",
+  "personRole": "DevOps Engineer",
+  "subject": "TEMP_SUPPORT",
+  "value": "Pagos",
+  "attributes": {},
+  "source": "EXCEL_SUPPORT",
+  "sourceRef": "APO-113",
+  "observedAt": "2026-11-13T08:00:00Z",
+  "recordedAt": "2026-11-13T08:00:00Z",
+  "recordedBy": "ingestion-service",
+  "evidence": [],
+  "validFrom": "2026-10-01",
+  "validUntil": "2026-12-15"
+ },
+ {
+  "id": "CLM-0070",
+  "personId": "U10014",
+  "personName": "Nora Pinto",
+  "personRole": "Backend Developer",
+  "subject": "ORG_MEMBERSHIP",
+  "value": "Riesgos",
+  "attributes": {},
+  "source": "SIGA",
+  "sourceRef": "SIGA:U10014",
+  "observedAt": "2026-11-13T08:00:00Z",
+  "recordedAt": "2026-11-13T08:00:00Z",
+  "recordedBy": "ingestion-service",
+  "evidence": []
+ },
+ {
+  "id": "CLM-0071",
+  "personId": "U10014",
+  "personName": "Nora Pinto",
+  "personRole": "Backend Developer",
+  "subject": "MANAGEMENT_RESPONSIBILITY",
+  "value": "L20002",
+  "attributes": {
+   "managerName": "Pedro Alva"
+  },
+  "source": "SIGA",
+  "sourceRef": "SIGA:U10014",
+  "observedAt": "2026-11-13T08:00:00Z",
+  "recordedAt": "2026-11-13T08:00:00Z",
+  "recordedBy": "ingestion-service",
+  "evidence": []
+ },
+ {
+  "id": "CLM-0072",
+  "personId": "U10014",
+  "personName": "Nora Pinto",
+  "personRole": "Backend Developer",
+  "subject": "BUDGET_ORIGIN",
+  "value": "Riesgos",
+  "attributes": {},
+  "source": "PREPER",
+  "sourceRef": "PREPER:U10014",
+  "observedAt": "2026-11-13T08:00:00Z",
+  "recordedAt": "2026-11-13T08:00:00Z",
+  "recordedBy": "ingestion-service",
+  "evidence": []
+ },
+ {
+  "id": "CLM-0073",
+  "personId": "U10014",
+  "personName": "Nora Pinto",
+  "personRole": "Backend Developer",
+  "subject": "OPERATIONAL_ASSIGNMENT",
+  "value": "Riesgos",
+  "attributes": {
+   "squad": "Squad Fraude"
+  },
+  "source": "JIRA",
+  "sourceRef": "JIRA:U10014",
+  "observedAt": "2026-11-13T08:00:00Z",
+  "recordedAt": "2026-11-13T08:00:00Z",
+  "recordedBy": "ingestion-service",
+  "evidence": []
+ },
+ {
+  "id": "CLM-0074",
+  "personId": "U10014",
+  "personName": "Nora Pinto",
+  "personRole": "Backend Developer",
+  "subject": "AVAILABILITY",
+  "value": "PLANNED",
+  "attributes": {
+   "reason": "Fin de asignación en Squad Fraude"
+  },
+  "source": "JIRA",
+  "sourceRef": "JIRA:U10014",
+  "observedAt": "2026-11-13T08:00:00Z",
+  "recordedAt": "2026-11-13T08:00:00Z",
+  "recordedBy": "ingestion-service",
+  "evidence": [],
+  "validFrom": "2027-01-20"
+ }
+]

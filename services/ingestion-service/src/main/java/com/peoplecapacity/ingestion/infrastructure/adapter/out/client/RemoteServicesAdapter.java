@@ -32,6 +32,6 @@ public class RemoteServicesAdapter implements LedgerPort, ReconciliationPort {
 
     @Override
     public void trigger(String syncRunId) {
-        cases.reconcile(Map.of("syncRunId", syncRunId));
+        cases.reconcile(Map.of("syncId", syncRunId));
     }
 }

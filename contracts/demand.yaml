@@ -1,0 +1,132 @@
+openapi: 3.0.3
+info:
+  title: demand-service
+  version: 0.1.0
+  description: Necesidades, estado de Reclutamiento y candidatos por mejor coincidencia de rol.
+servers:
+  - url: http://localhost:8085
+paths:
+  /needs:
+    put:
+      summary: Ingestion entrega necesidades y seguimiento de Reclutamiento (upsert por externalId)
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [needs]
+              properties:
+                needs: { type: array, items: { $ref: '#/components/schemas/NeedInput' } }
+      responses:
+        '200':
+          description: Resultado
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  created: { type: integer }
+                  updated: { type: integer }
+        '400': { description: Necesidad sin fuente o sin fecha de consulta }
+    get:
+      summary: Tablero de demanda con candidatos ordenados
+      parameters:
+        - { name: status, in: query, schema: { $ref: '#/components/schemas/NeedStatus' } }
+      responses:
+        '200':
+          description: Necesidades
+          content:
+            application/json:
+              schema: { type: array, items: { $ref: '#/components/schemas/Need' } }
+    post:
+      summary: Registra una necesidad informal desde la web
+      parameters:
+        - { name: X-User-Id, in: header, schema: { type: string } }
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: '#/components/schemas/InformalNeedInput' }
+      responses:
+        '201':
+          description: Creada
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/Need' }
+        '400': { description: Falta tribu/proyecto o perfil }
+components:
+  schemas:
+    NeedStatus: { type: string, enum: [OPEN, COVERED, CANCELLED] }
+    Mechanism:
+      type: string
+      description: Cómo se piensa cubrir
+      enum: [INTERNAL_MOVE, EXTERNAL_HIRE, PROVIDER, TEMP_SUPPORT, UNDEFINED]
+    RecruitmentStatus:
+      type: object
+      description: Estado en Reclutamiento, siempre con su fuente y fecha de consulta. null si no hay seguimiento.
+      nullable: true
+      properties:
+        status: { type: string, enum: [NOT_STARTED, SOURCING, INTERVIEWS, OFFER, HIRED, CANCELLED] }
+        source: { type: string }
+        observedAt: { type: string, format: date-time }
+    NeedInput:
+      type: object
+      required: [externalId, role, source, observedAt]
+      properties:
+        externalId: { type: string }
+        tribe: { type: string }
+        project: { type: string }
+        role: { type: string, description: 'Perfil requerido, p. ej. Backend Developer' }
+        seniority: { type: string }
+        mechanism: { $ref: '#/components/schemas/Mechanism' }
+        neededFrom: { type: string, format: date }
+        status: { $ref: '#/components/schemas/NeedStatus' }
+        source: { type: string, description: 'Fuente, p. ej. EXCEL_RECRUITMENT, EMAIL' }
+        observedAt: { type: string, format: date-time }
+        recruitment: { $ref: '#/components/schemas/RecruitmentStatus' }
+        evidenceQuote: { type: string, description: Cita del correo si la necesidad viene de un correo }
+        note: { type: string, description: 'Respaldo de la necesidad, p. ej. la caja PREPER que la financia' }
+    InformalNeedInput:
+      type: object
+      required: [role]
+      properties:
+        tribe: { type: string }
+        project: { type: string }
+        role: { type: string }
+        seniority: { type: string }
+        mechanism: { $ref: '#/components/schemas/Mechanism' }
+        neededFrom: { type: string, format: date }
+        note: { type: string }
+    Candidate:
+      type: object
+      properties:
+        personId: { type: string }
+        personName: { type: string }
+        personRole: { type: string }
+        availableFrom: { type: string, format: date }
+        availabilityStatus: { type: string, enum: [PLANNED, CONFIRMED] }
+        source: { type: string }
+        observedAt: { type: string, format: date-time }
+        score: { type: integer, description: 0 a 100 }
+        reason: { type: string, description: Razón legible del puntaje }
+    Need:
+      type: object
+      properties:
+        id: { type: string }
+        externalId: { type: string, nullable: true }
+        informal: { type: boolean }
+        tribe: { type: string }
+        project: { type: string }
+        role: { type: string }
+        seniority: { type: string }
+        mechanism: { $ref: '#/components/schemas/Mechanism' }
+        neededFrom: { type: string, format: date }
+        status: { $ref: '#/components/schemas/NeedStatus' }
+        source: { type: string }
+        observedAt: { type: string, format: date-time }
+        recruitment: { $ref: '#/components/schemas/RecruitmentStatus' }
+        note: { type: string }
+        createdBy: { type: string }
+        candidates: { type: array, items: { $ref: '#/components/schemas/Candidate' } }
+        candidatesAvailable: { type: boolean, description: false si el libro no respondió; la lista viene vacía y la web lo indica }

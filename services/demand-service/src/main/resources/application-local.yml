@@ -1,0 +1,11 @@
+# Perfil local: H2 en memoria. Lo usan las pruebas.
+spring:
+  datasource:
+    url: jdbc:h2:mem:demand;MODE=PostgreSQL;INIT=CREATE SCHEMA IF NOT EXISTS demand
+    driver-class-name: org.h2.Driver
+    username: sa
+    password: ""
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+

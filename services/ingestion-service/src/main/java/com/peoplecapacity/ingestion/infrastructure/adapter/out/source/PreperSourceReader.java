@@ -33,6 +33,12 @@ public class PreperSourceReader implements SourceReaderPort {
                     + box.get("fundingTribe") + ";type=" + box.get("assignmentType");
             claims.add(new SourceClaim(String.valueOf(box.get("employeeId")), null, null, "FUNDING", value, "PREPER",
                     date(box.get("validFrom")), date(box.get("validTo")), LocalDate.now(), "ASSERTED"));
+            LocalDate until = date(box.get("validTo"));
+            if ("Temporal".equals(box.get("assignmentType")) && until != null && !until.isBefore(LocalDate.now())
+                    && !until.isAfter(LocalDate.now().plusDays(90))) {
+                claims.add(new SourceClaim(String.valueOf(box.get("employeeId")), null, null, "AVAILABILITY", "PLANNED",
+                        "PREPER", until.plusDays(1), null, LocalDate.now(), "ASSERTED"));
+            }
         }
         return claims;
     }

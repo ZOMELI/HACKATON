@@ -1,0 +1,31 @@
+server:
+  port: 8085
+
+spring:
+  application:
+    name: demand-service
+  datasource:
+    url: ${DB_URL:jdbc:postgresql://localhost:5433/hackaton}
+    username: ${DB_USER:assistant}
+    password: ${DB_PASSWORD:assistant}
+  jpa:
+    open-in-view: false
+    hibernate:
+      ddl-auto: validate
+    properties:
+      hibernate:
+        default_schema: demand
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health
+
+# Libro de afirmaciones: siempre el ledger-service real
+ledger:
+  mode: http
+  url: ${LEDGER_URL:http://localhost:8083}
+  connect-timeout-ms: 1000
+  read-timeout-ms: 2000
+

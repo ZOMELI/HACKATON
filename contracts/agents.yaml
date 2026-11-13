@@ -1,0 +1,129 @@
+openapi: 3.0.3
+info:
+  title: agents-service
+  version: 0.1.0
+  description: >
+    Agente de evidencia y agente de expediente. Único servicio que llama al modelo de lenguaje.
+    Leen y redactan; no detectan ni deciden. La salida del modelo se valida contra el esquema y,
+    si no cumple o el modelo falla, se usa el respaldo determinista. AGENTS_MODE = live | recorded.
+servers:
+  - url: http://localhost:8086
+paths:
+  /evidence-extractions:
+    post:
+      summary: Convierte un correo en evidencia estructurada
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: '#/components/schemas/EmailInput' }
+      responses:
+        '200':
+          description: Evidencia extraída
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/EvidenceExtraction' }
+        '400': { description: Falta emailId o body }
+  /case-summaries:
+    post:
+      summary: Redacta el resumen de un caso y el texto de las opciones que las reglas ya definieron
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: '#/components/schemas/CaseSummaryRequest' }
+      responses:
+        '200':
+          description: Resumen redactado
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/CaseSummary' }
+        '400': { description: Falta caseId, type u options }
+components:
+  schemas:
+    Mode:
+      type: string
+      enum: [LIVE, RECORDED]
+      description: LIVE = lo redactó el modelo. RECORDED = respaldo (extracción grabada o plantilla), por configuración o por fallo del modelo.
+    EmailInput:
+      type: object
+      required: [emailId, body]
+      properties:
+        emailId: { type: string }
+        from: { type: string }
+        to: { type: string }
+        subject: { type: string }
+        receivedAt: { type: string, format: date-time }
+        body: { type: string }
+    EvidenceExtraction:
+      type: object
+      required: [emailId, type, personIds, aiGenerated, mode]
+      properties:
+        emailId: { type: string }
+        type:
+          type: string
+          enum: [MOVEMENT_APPROVAL, SWAP_CONFORMITY, CONTRACT_RENEWAL, CONTRACT_REPLACEMENT, TEMP_SUPPORT, INFORMAL_NEED, IRRELEVANT]
+        personIds: { type: array, items: { type: string }, description: Matrículas mencionadas }
+        movementId: { type: string, nullable: true }
+        contractId: { type: string, nullable: true, description: Id del acta }
+        effectiveFrom: { type: string, format: date, nullable: true }
+        effectiveUntil: { type: string, format: date, nullable: true }
+        approver: { type: string, nullable: true, description: Quién aprueba }
+        quote: { type: string, nullable: true, description: Cita textual del correo que respalda la extracción. Debe aparecer literalmente en el body. }
+        aiGenerated: { type: boolean }
+        mode: { $ref: '#/components/schemas/Mode' }
+    CaseSummaryRequest:
+      type: object
+      required: [caseId, type, options]
+      properties:
+        caseId: { type: string }
+        type: { type: string, description: Uno de los ocho CaseType de cases.yaml }
+        title: { type: string }
+        personId: { type: string }
+        personName: { type: string }
+        dueDate: { type: string, format: date }
+        claims:
+          type: array
+          items:
+            type: object
+            properties:
+              subject: { type: string }
+              value: { type: string }
+              attributes: { type: object, additionalProperties: { type: string } }
+              source: { type: string }
+              observedAt: { type: string, format: date-time }
+              validFrom: { type: string, format: date }
+              validUntil: { type: string, format: date }
+        evidence:
+          type: array
+          items:
+            type: object
+            properties:
+              type: { type: string }
+              quote: { type: string }
+              approver: { type: string }
+        options:
+          type: array
+          items:
+            type: object
+            required: [id, label]
+            properties:
+              id: { type: string }
+              label: { type: string }
+    CaseSummary:
+      type: object
+      required: [caseId, summary, options, aiGenerated, mode]
+      properties:
+        caseId: { type: string }
+        summary: { type: string, description: Resumen en lenguaje claro, en español }
+        options:
+          description: Exactamente los mismos ids recibidos, sin agregar ni quitar
+          type: array
+          items:
+            type: object
+            required: [id, text]
+            properties:
+              id: { type: string }
+              text: { type: string }
+        aiGenerated: { type: boolean }
+        mode: { $ref: '#/components/schemas/Mode' }

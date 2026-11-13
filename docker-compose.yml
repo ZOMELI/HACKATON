@@ -1,103 +1,107 @@
-# Levanta la base H2 compartida y los 6 microservicios.
-# Antes: mvn package (o scripts/build-all.sh) para generar target/quarkus-app en cada servicio.
-name: people-capacity
-
-x-db: &db
-  DB_USER: sa
-  DB_PASSWORD: peoplecapacity
-
-x-service: &service
-  restart: on-failure
-
+# Levanta todo: migraciones, mock-sources, ledger, ingestion, cases, demand, agents y web.
+# La base es un Postgres externo que ya corre en la máquina: localhost:5433, base `hackaton`
+# (desde los contenedores se llega por host.docker.internal). Se cambia con DB_URL, DB_USER y DB_PASSWORD.
+# Nada es simulado salvo mock-sources, que hace de SIGA, PREPER y Jira.
 services:
-  h2:
-    build: ./database
-    environment:
-      H2_PASSWORD: peoplecapacity
-    ports:
-      - "9092:9092"   # JDBC por TCP
-      - "8090:8090"   # consola web de H2
-    volumes:
-      - h2-data:/data
+  migrate-cases:
+    image: flyway/flyway:10-alpine
+    command: -url=${DB_URL:-jdbc:postgresql://host.docker.internal:5433/hackaton} -user=${DB_USER:-assistant} -password=${DB_PASSWORD:-assistant} -schemas=cases -locations=filesystem:/flyway/sql migrate
+    volumes: ["./database/cases:/flyway/sql:ro"]
+    extra_hosts: ["host.docker.internal:host-gateway"]
+
+  migrate-demand:
+    image: flyway/flyway:10-alpine
+    command: -url=${DB_URL:-jdbc:postgresql://host.docker.internal:5433/hackaton} -user=${DB_USER:-assistant} -password=${DB_PASSWORD:-assistant} -schemas=demand -locations=filesystem:/flyway/sql migrate
+    volumes: ["./database/demand:/flyway/sql:ro"]
+    extra_hosts: ["host.docker.internal:host-gateway"]
+
+  migrate-ledger:
+    image: flyway/flyway:10-alpine
+    command: -url=${DB_URL:-jdbc:postgresql://host.docker.internal:5433/hackaton} -user=${DB_USER:-assistant} -password=${DB_PASSWORD:-assistant} -schemas=ledger -locations=filesystem:/flyway/sql migrate
+    volumes: ["./database/ledger:/flyway/sql:ro"]
+    extra_hosts: ["host.docker.internal:host-gateway"]
+
+  migrate-ingestion:
+    image: flyway/flyway:10-alpine
+    command: -url=${DB_URL:-jdbc:postgresql://host.docker.internal:5433/hackaton} -user=${DB_USER:-assistant} -password=${DB_PASSWORD:-assistant} -schemas=ingestion -locations=filesystem:/flyway/sql migrate
+    volumes: ["./database/ingestion:/flyway/sql:ro"]
+    extra_hosts: ["host.docker.internal:host-gateway"]
 
   mock-sources:
-    <<: *service
-    build:
-      context: ./services/mock-sources
-      dockerfile: src/main/docker/Dockerfile.jvm
-    ports:
-      - "8081:8081"
+    build: ./services/mock-sources          # APIs simuladas de SIGA, PREPER y Jira; sin base de datos
+    ports: ["8081:8081"]
+
+  ledger-service:
+    build: ./services/ledger-service
+    environment:
+      DB_URL: ${DB_URL:-jdbc:postgresql://host.docker.internal:5433/hackaton}
+      DB_USER: ${DB_USER:-assistant}
+      DB_PASSWORD: ${DB_PASSWORD:-assistant}
+      MOCK_SOURCES_URL: http://mock-sources:8081
+    ports: ["8083:8083"]
+    extra_hosts: ["host.docker.internal:host-gateway"]
+    depends_on:
+      migrate-ledger: { condition: service_completed_successfully }
+      mock-sources: { condition: service_started }
 
   ingestion-service:
-    <<: *service
-    build:
-      context: ./services/ingestion-service
-      dockerfile: src/main/docker/Dockerfile.jvm
+    build: ./services/ingestion-service
     environment:
-      <<: *db
-      DB_URL: jdbc:h2:tcp://h2:9092/peoplecapacity;SCHEMA=INGESTION
+      DB_URL: ${DB_URL:-jdbc:postgresql://host.docker.internal:5433/hackaton}
+      DB_USER: ${DB_USER:-assistant}
+      DB_PASSWORD: ${DB_PASSWORD:-assistant}
       MOCK_SOURCES_URL: http://mock-sources:8081
       LEDGER_URL: http://ledger-service:8083
       CASES_URL: http://cases-service:8084
-      SOURCES_DIR: /fuentes
-    volumes:
-      - ./fuentes:/fuentes:ro
-    ports:
-      - "8082:8082"
-    depends_on: [h2, mock-sources, ledger-service, cases-service]
-
-  ledger-service:
-    <<: *service
-    build:
-      context: ./services/ledger-service
-      dockerfile: src/main/docker/Dockerfile.jvm
-    environment:
-      <<: *db
-      DB_URL: jdbc:h2:tcp://h2:9092/peoplecapacity;SCHEMA=LEDGER
-      MOCK_SOURCES_URL: http://mock-sources:8081
-    ports:
-      - "8083:8083"
-    depends_on: [h2, mock-sources]
-
-  cases-service:
-    <<: *service
-    build:
-      context: ./services/cases-service
-      dockerfile: src/main/docker/Dockerfile.jvm
-    environment:
-      <<: *db
-      DB_URL: jdbc:h2:tcp://h2:9092/peoplecapacity;SCHEMA=CASES
-      LEDGER_URL: http://ledger-service:8083
+      DEMAND_URL: http://demand-service:8085
       AGENTS_URL: http://agents-service:8086
-    ports:
-      - "8084:8084"
-    depends_on: [h2, ledger-service, agents-service]
-
-  demand-service:
-    <<: *service
-    build:
-      context: ./services/demand-service
-      dockerfile: src/main/docker/Dockerfile.jvm
-    environment:
-      <<: *db
-      DB_URL: jdbc:h2:tcp://h2:9092/peoplecapacity;SCHEMA=DEMAND
-      LEDGER_URL: http://ledger-service:8083
-    ports:
-      - "8085:8085"
-    depends_on: [h2, ledger-service]
+      SOURCES_DIR: /fuentes
+    volumes: ["./fuentes:/fuentes:ro"]
+    ports: ["8082:8082"]
+    extra_hosts: ["host.docker.internal:host-gateway"]
+    depends_on:
+      migrate-ingestion: { condition: service_completed_successfully }
+      mock-sources: { condition: service_started }
+      ledger-service: { condition: service_started }
 
   agents-service:
-    <<: *service
-    build:
-      context: ./services/agents-service
-      dockerfile: src/main/docker/Dockerfile.jvm
+    build: ./services/agents-service
     environment:
-      <<: *db
-      DB_URL: jdbc:h2:tcp://h2:9092/peoplecapacity;SCHEMA=AGENTS
-      AGENTS_MODE: recorded
-    ports:
-      - "8086:8086"
-    depends_on: [h2]
+      AGENTS_MODE: ${AGENTS_MODE:-recorded}      # live necesita OPENAI_API_KEY
+      OPENAI_API_KEY: ${OPENAI_API_KEY:-}
+      OPENAI_MODEL: ${OPENAI_MODEL:-gpt-4o-mini}
+    ports: ["8086:8086"]
 
-volumes:
-  h2-data:
+  cases-service:
+    build: ./services/cases-service
+    environment:
+      DB_URL: ${DB_URL:-jdbc:postgresql://host.docker.internal:5433/hackaton}
+      DB_USER: ${DB_USER:-assistant}
+      DB_PASSWORD: ${DB_PASSWORD:-assistant}
+      LEDGER_URL: ${LEDGER_URL:-http://ledger-service:8083}
+      AGENTS_URL: http://agents-service:8086
+      CASES_RECONCILE_ON_STARTUP: ${CASES_RECONCILE_ON_STARTUP:-false}   # concilia cuando ingestion termina de sincronizar
+      CASES_DEFAULT_OWNER_ID: ${CASES_DEFAULT_OWNER_ID:-B10021}
+      CASES_REFERENCE_DATE: ${CASES_REFERENCE_DATE:-}
+    ports: ["8084:8084"]
+    extra_hosts: ["host.docker.internal:host-gateway"]
+    depends_on:
+      migrate-cases: { condition: service_completed_successfully }
+      agents-service: { condition: service_started }
+
+  demand-service:
+    build: ./services/demand-service
+    environment:
+      DB_URL: ${DB_URL:-jdbc:postgresql://host.docker.internal:5433/hackaton}
+      DB_USER: ${DB_USER:-assistant}
+      DB_PASSWORD: ${DB_PASSWORD:-assistant}
+      LEDGER_URL: ${LEDGER_URL:-http://ledger-service:8083}
+    ports: ["8085:8085"]
+    extra_hosts: ["host.docker.internal:host-gateway"]
+    depends_on:
+      migrate-demand: { condition: service_completed_successfully }
+
+  web:
+    build: ./web
+    ports: ["5173:80"]
+    depends_on: [cases-service, demand-service, ledger-service, ingestion-service]

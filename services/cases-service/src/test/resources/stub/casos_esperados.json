@@ -1,0 +1,75 @@
+{
+ "referenceDate": "2026-11-13",
+ "alertSettings": {
+  "contractExpiryDays": 30,
+  "availabilityDays": 15
+ },
+ "expected": [
+  {
+   "type": "BUDGET_ASSIGNMENT_MISMATCH",
+   "personId": "U10001",
+   "ownerId": "L20001"
+  },
+  {
+   "type": "MOVEMENT_NOT_REFLECTED",
+   "personId": "U10002",
+   "ownerId": "L20001"
+  },
+  {
+   "type": "MANAGER_MISMATCH",
+   "personId": "U10003",
+   "ownerId": "C30001"
+  },
+  {
+   "type": "MOVEMENT_WITHOUT_EVIDENCE",
+   "personId": "U10004",
+   "ownerId": "L20002"
+  },
+  {
+   "type": "SWAP_INCOMPLETE",
+   "personId": "U10006",
+   "ownerId": "L20001"
+  },
+  {
+   "type": "CONTRACT_EXPIRING",
+   "personId": "U10007",
+   "ownerId": "L20002"
+  },
+  {
+   "type": "AVAILABILITY_UNCONFIRMED",
+   "personId": "U10008",
+   "ownerId": "L20001"
+  },
+  {
+   "type": "TEMP_SUPPORT_EXPIRED",
+   "personId": "U10009",
+   "ownerId": "L20002"
+  }
+ ],
+ "negatives": [
+  {
+   "personId": "U10010",
+   "why": "Movimiento con evidencia y reflejado en SIGA; acta vence en 2027"
+  },
+  {
+   "personId": "U10011",
+   "why": "Acta por vencer pero con correo de renovación"
+  },
+  {
+   "personId": "U10012",
+   "why": "Disponibilidad ya confirmada"
+  },
+  {
+   "personId": "U10013",
+   "why": "Presupuesto y asignación difieren pero hay apoyo temporal vigente"
+  },
+  {
+   "personId": "U10014",
+   "why": "Disponibilidad prevista fuera de los días de alerta"
+  },
+  {
+   "personId": "U10005",
+   "why": "Su responsable ya dio conformidad al enroque; el caso es de U10006"
+  }
+ ]
+}

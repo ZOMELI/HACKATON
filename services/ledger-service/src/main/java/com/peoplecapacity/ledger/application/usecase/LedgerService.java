@@ -45,6 +45,9 @@ public class LedgerService implements LedgerUseCase {
                 continue;
             }
             String status = claim.status() == null ? "ASSERTED" : claim.status();
+            if (repeatsLatest(claim, status)) {
+                continue; // la fuente no cambió: volver a sincronizar no duplica el libro
+            }
             repository.append(claim.recorded(status, LocalDateTime.now()));
             recorded++;
         }
@@ -101,5 +104,20 @@ public class LedgerService implements LedgerUseCase {
             }
         }
         return new ArrayList<>(bySource.values());
+    }
+
+    /** Verdadero si la última afirmación de la misma persona, dimensión y fuente dice exactamente lo mismo. */
+    private boolean repeatsLatest(Claim claim, String status) {
+        if ("CASE_DECISION".equalsIgnoreCase(claim.source())) {
+            return false; // cada decisión se registra siempre
+        }
+        List<Claim> same = repository.search(claim.personId(), claim.dimension(), null).stream()
+                .filter(c -> c.source().equalsIgnoreCase(claim.source())).toList();
+        java.util.function.Predicate<Claim> equal = c -> Objects.equals(c.value(), claim.value())
+                && Objects.equals(c.validFrom(), claim.validFrom()) && Objects.equals(c.validTo(), claim.validTo())
+                && c.status().equalsIgnoreCase(status);
+        // Evidencia: una persona puede tener varias (un movimiento, un correo...), se compara contra todas.
+        return "EVIDENCE".equalsIgnoreCase(claim.dimension()) ? same.stream().anyMatch(equal)
+                : same.stream().findFirst().map(equal::test).orElse(false);
     }
 }
