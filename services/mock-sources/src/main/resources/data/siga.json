@@ -1,0 +1,519 @@
+{
+  "orgUnits": [
+    {
+      "code": "UO-100",
+      "name": "Gerencia de Ingeniería CIO",
+      "tribe": null
+    },
+    {
+      "code": "UO-110",
+      "name": "Ingeniería Pagos",
+      "tribe": "Pagos"
+    },
+    {
+      "code": "UO-120",
+      "name": "Ingeniería Cuentas",
+      "tribe": "Cuentas"
+    },
+    {
+      "code": "UO-130",
+      "name": "Ingeniería Créditos",
+      "tribe": "Créditos"
+    }
+  ],
+  "employees": [
+    {
+      "employeeId": "B10021",
+      "fullName": "Castillo Pacheco, Milagros",
+      "email": "milagros.castillo@bancosimulado.example",
+      "orgUnitCode": "UO-100",
+      "role": "Gerente",
+      "managerId": null,
+      "salaryGrade": "G7"
+    },
+    {
+      "employeeId": "B10058",
+      "fullName": "Mendoza Campos, Carlos",
+      "email": "carlos.mendoza@bancosimulado.example",
+      "orgUnitCode": "UO-100",
+      "role": "CAL",
+      "managerId": "B10021",
+      "salaryGrade": "G8"
+    },
+    {
+      "employeeId": "B10095",
+      "fullName": "Córdova Guerra, Lucía",
+      "email": "lucia.cordova@bancosimulado.example",
+      "orgUnitCode": "UO-100",
+      "role": "CAL",
+      "managerId": "B10021",
+      "salaryGrade": "G7"
+    },
+    {
+      "employeeId": "B10132",
+      "fullName": "Tello Espinoza, Carlos",
+      "email": "carlos.tello@bancosimulado.example",
+      "orgUnitCode": "UO-100",
+      "role": "CL",
+      "managerId": "B10058",
+      "salaryGrade": "G8"
+    },
+    {
+      "employeeId": "B10169",
+      "fullName": "Chávez Arce, María",
+      "email": "maria.chavez@bancosimulado.example",
+      "orgUnitCode": "UO-100",
+      "role": "CL",
+      "managerId": "B10058",
+      "salaryGrade": "G8"
+    },
+    {
+      "employeeId": "B10206",
+      "fullName": "Mendoza Núñez, Daniela",
+      "email": "daniela.mendoza@bancosimulado.example",
+      "orgUnitCode": "UO-100",
+      "role": "CL",
+      "managerId": "B10095",
+      "salaryGrade": "G9"
+    },
+    {
+      "employeeId": "B10243",
+      "fullName": "Delgado Arce, Jorge",
+      "email": "jorge.delgado@bancosimulado.example",
+      "orgUnitCode": "UO-100",
+      "role": "PO",
+      "managerId": "B10021",
+      "salaryGrade": "G7"
+    },
+    {
+      "employeeId": "B10280",
+      "fullName": "Farfán Torres, Carlos",
+      "email": "carlos.farfan@bancosimulado.example",
+      "orgUnitCode": "UO-100",
+      "role": "PO",
+      "managerId": "B10021",
+      "salaryGrade": "G6"
+    },
+    {
+      "employeeId": "B10317",
+      "fullName": "Guerra Huamán, Valeria",
+      "email": "valeria.guerra@bancosimulado.example",
+      "orgUnitCode": "UO-100",
+      "role": "PO",
+      "managerId": "B10021",
+      "salaryGrade": "G8"
+    },
+    {
+      "employeeId": "B10354",
+      "fullName": "Guerra Pacheco, Lorena",
+      "email": "lorena.guerra@bancosimulado.example",
+      "orgUnitCode": "UO-100",
+      "role": "PO",
+      "managerId": "B10021",
+      "salaryGrade": "G9"
+    },
+    {
+      "employeeId": "B10391",
+      "fullName": "Cárdenas Rojas, Carlos",
+      "email": "carlos.cardenas@bancosimulado.example",
+      "orgUnitCode": "UO-100",
+      "role": "PO",
+      "managerId": "B10021",
+      "salaryGrade": "G9"
+    },
+    {
+      "employeeId": "B10428",
+      "fullName": "Vargas Palomino, Fabián",
+      "email": "fabian.vargas@bancosimulado.example",
+      "orgUnitCode": "UO-100",
+      "role": "PO",
+      "managerId": "B10021",
+      "salaryGrade": "G7"
+    },
+    {
+      "employeeId": "B10465",
+      "fullName": "Castillo Campos, Daniela",
+      "email": "daniela.castillo@bancosimulado.example",
+      "orgUnitCode": "UO-100",
+      "role": "PO",
+      "managerId": "B10021",
+      "salaryGrade": "G7"
+    },
+    {
+      "employeeId": "B10502",
+      "fullName": "Farfán Villanueva, Miguel",
+      "email": "miguel.farfan@bancosimulado.example",
+      "orgUnitCode": "UO-100",
+      "role": "PO",
+      "managerId": "B10021",
+      "salaryGrade": "G6"
+    },
+    {
+      "employeeId": "B10539",
+      "fullName": "Farfán Huamán, Rosa",
+      "email": "rosa.farfan@bancosimulado.example",
+      "orgUnitCode": "UO-110",
+      "role": "LT",
+      "managerId": "B10132",
+      "salaryGrade": "G6"
+    },
+    {
+      "employeeId": "B10576",
+      "fullName": "Espinoza Rivas, Alonso",
+      "email": "alonso.espinoza@bancosimulado.example",
+      "orgUnitCode": "UO-110",
+      "role": "Desarrollador",
+      "managerId": "B10132",
+      "salaryGrade": "G4"
+    },
+    {
+      "employeeId": "B10613",
+      "fullName": "Arce Cabrera, Mónica",
+      "email": "monica.arce@bancosimulado.example",
+      "orgUnitCode": "UO-110",
+      "role": "Desarrollador",
+      "managerId": "B10169",
+      "salaryGrade": "G3"
+    },
+    {
+      "employeeId": "B10650",
+      "fullName": "Guerra Montoya, Víctor",
+      "email": "victor.guerra@bancosimulado.example",
+      "orgUnitCode": "UO-110",
+      "role": "Desarrollador",
+      "managerId": "B10132",
+      "salaryGrade": "G4"
+    },
+    {
+      "employeeId": "B10687",
+      "fullName": "Villanueva Ybarra, Lorena",
+      "email": "lorena.villanueva@bancosimulado.example",
+      "orgUnitCode": "UO-110",
+      "role": "QE",
+      "managerId": "B10206",
+      "salaryGrade": "G4"
+    },
+    {
+      "employeeId": "B10724",
+      "fullName": "Herrera Mendoza, Claudia",
+      "email": "claudia.herrera@bancosimulado.example",
+      "orgUnitCode": "UO-110",
+      "role": "LT",
+      "managerId": "B10132",
+      "salaryGrade": "G4"
+    },
+    {
+      "employeeId": "B10761",
+      "fullName": "Tello Valdivia, Miguel",
+      "email": "miguel.tello@bancosimulado.example",
+      "orgUnitCode": "UO-110",
+      "role": "Desarrollador",
+      "managerId": "B10132",
+      "salaryGrade": "G6"
+    },
+    {
+      "employeeId": "B10798",
+      "fullName": "Zegarra Castillo, Elena",
+      "email": "elena.zegarra@bancosimulado.example",
+      "orgUnitCode": "UO-110",
+      "role": "Desarrollador",
+      "managerId": "B10169",
+      "salaryGrade": "G3"
+    },
+    {
+      "employeeId": "B10835",
+      "fullName": "Valdivia Rojas, Ernesto",
+      "email": "ernesto.valdivia@bancosimulado.example",
+      "orgUnitCode": "UO-110",
+      "role": "Desarrollador",
+      "managerId": "B10132",
+      "salaryGrade": "G3"
+    },
+    {
+      "employeeId": "B10872",
+      "fullName": "Rivas Guerra, Silvia",
+      "email": "silvia.rivas@bancosimulado.example",
+      "orgUnitCode": "UO-110",
+      "role": "QE",
+      "managerId": "B10206",
+      "salaryGrade": "G5"
+    },
+    {
+      "employeeId": "B10909",
+      "fullName": "Ponce Mendoza, Renzo",
+      "email": "renzo.ponce@bancosimulado.example",
+      "orgUnitCode": "UO-110",
+      "role": "LT",
+      "managerId": "B10132",
+      "salaryGrade": "G6"
+    },
+    {
+      "employeeId": "B10946",
+      "fullName": "Villanueva Farfán, Carlos",
+      "email": "carlos.villanueva@bancosimulado.example",
+      "orgUnitCode": "UO-110",
+      "role": "Desarrollador",
+      "managerId": "B10132",
+      "salaryGrade": "G3"
+    },
+    {
+      "employeeId": "B10983",
+      "fullName": "Palomino Lozano, Karina",
+      "email": "karina.palomino@bancosimulado.example",
+      "orgUnitCode": "UO-110",
+      "role": "Desarrollador",
+      "managerId": "B10169",
+      "salaryGrade": "G3"
+    },
+    {
+      "employeeId": "B11020",
+      "fullName": "Flores Montoya, Gabriela",
+      "email": "gabriela.flores@bancosimulado.example",
+      "orgUnitCode": "UO-110",
+      "role": "Desarrollador",
+      "managerId": "B10132",
+      "salaryGrade": "G4"
+    },
+    {
+      "employeeId": "B11057",
+      "fullName": "Palomino Vargas, Diego",
+      "email": "diego.palomino@bancosimulado.example",
+      "orgUnitCode": "UO-110",
+      "role": "QE",
+      "managerId": "B10206",
+      "salaryGrade": "G4"
+    },
+    {
+      "employeeId": "B11094",
+      "fullName": "Pacheco Delgado, Karina",
+      "email": "karina.pacheco@bancosimulado.example",
+      "orgUnitCode": "UO-120",
+      "role": "LT",
+      "managerId": "B10132",
+      "salaryGrade": "G5"
+    },
+    {
+      "employeeId": "B11131",
+      "fullName": "Vargas Arce, Renzo",
+      "email": "renzo.vargas@bancosimulado.example",
+      "orgUnitCode": "UO-120",
+      "role": "Desarrollador",
+      "managerId": "B10132",
+      "salaryGrade": "G3"
+    },
+    {
+      "employeeId": "B11168",
+      "fullName": "Aguilar Valdivia, Fabián",
+      "email": "fabian.aguilar@bancosimulado.example",
+      "orgUnitCode": "UO-120",
+      "role": "Desarrollador",
+      "managerId": "B10169",
+      "salaryGrade": "G3"
+    },
+    {
+      "employeeId": "B11205",
+      "fullName": "Lozano Cárdenas, Gabriela",
+      "email": "gabriela.lozano@bancosimulado.example",
+      "orgUnitCode": "UO-120",
+      "role": "Desarrollador",
+      "managerId": "B10132",
+      "salaryGrade": "G6"
+    },
+    {
+      "employeeId": "B11242",
+      "fullName": "Medina Palomino, Pedro",
+      "email": "pedro.medina@bancosimulado.example",
+      "orgUnitCode": "UO-120",
+      "role": "QE",
+      "managerId": "B10206",
+      "salaryGrade": "G3"
+    },
+    {
+      "employeeId": "B11279",
+      "fullName": "Córdova Infante, Mónica",
+      "email": "monica.cordova@bancosimulado.example",
+      "orgUnitCode": "UO-120",
+      "role": "LT",
+      "managerId": "B10132",
+      "salaryGrade": "G3"
+    },
+    {
+      "employeeId": "B11316",
+      "fullName": "Cabrera Vargas, Lorena",
+      "email": "lorena.cabrera@bancosimulado.example",
+      "orgUnitCode": "UO-120",
+      "role": "Desarrollador",
+      "managerId": "B10132",
+      "salaryGrade": "G6"
+    },
+    {
+      "employeeId": "B11353",
+      "fullName": "Infante Huamán, Pilar",
+      "email": "pilar.infante@bancosimulado.example",
+      "orgUnitCode": "UO-120",
+      "role": "Desarrollador",
+      "managerId": "B10169",
+      "salaryGrade": "G5"
+    },
+    {
+      "employeeId": "B11390",
+      "fullName": "Delgado Pacheco, Víctor",
+      "email": "victor.delgado@bancosimulado.example",
+      "orgUnitCode": "UO-120",
+      "role": "Arquitecto de Solución",
+      "managerId": "B10132",
+      "salaryGrade": "G4"
+    },
+    {
+      "employeeId": "B11427",
+      "fullName": "Gutiérrez Mendoza, Carlos",
+      "email": "carlos.gutierrez@bancosimulado.example",
+      "orgUnitCode": "UO-120",
+      "role": "QE",
+      "managerId": "B10206",
+      "salaryGrade": "G5"
+    },
+    {
+      "employeeId": "B11464",
+      "fullName": "Zegarra Herrera, Miguel",
+      "email": "miguel.zegarra@bancosimulado.example",
+      "orgUnitCode": "UO-120",
+      "role": "LT",
+      "managerId": "B10132",
+      "salaryGrade": "G6"
+    },
+    {
+      "employeeId": "B11501",
+      "fullName": "Ramos Quispe, Carlos",
+      "email": "carlos.ramos@bancosimulado.example",
+      "orgUnitCode": "UO-120",
+      "role": "Desarrollador",
+      "managerId": "B10132",
+      "salaryGrade": "G6"
+    },
+    {
+      "employeeId": "B11538",
+      "fullName": "Castillo Campos, Lorena",
+      "email": "lorena.castillo@bancosimulado.example",
+      "orgUnitCode": "UO-120",
+      "role": "Desarrollador",
+      "managerId": "B10169",
+      "salaryGrade": "G4"
+    },
+    {
+      "employeeId": "B11575",
+      "fullName": "Mendoza Espinoza, Luis",
+      "email": "luis.mendoza@bancosimulado.example",
+      "orgUnitCode": "UO-120",
+      "role": "Desarrollador",
+      "managerId": "B10132",
+      "salaryGrade": "G5"
+    },
+    {
+      "employeeId": "B11612",
+      "fullName": "Benites Herrera, Paola",
+      "email": "paola.benites@bancosimulado.example",
+      "orgUnitCode": "UO-120",
+      "role": "QE",
+      "managerId": "B10206",
+      "salaryGrade": "G4"
+    },
+    {
+      "employeeId": "B11649",
+      "fullName": "Ponce Villanueva, Natalia",
+      "email": "natalia.ponce@bancosimulado.example",
+      "orgUnitCode": "UO-130",
+      "role": "LT",
+      "managerId": "B10132",
+      "salaryGrade": "G6"
+    },
+    {
+      "employeeId": "B11686",
+      "fullName": "Castillo Ramos, Jorge",
+      "email": "jorge.castillo@bancosimulado.example",
+      "orgUnitCode": "UO-130",
+      "role": "Desarrollador",
+      "managerId": "B10132",
+      "salaryGrade": "G4"
+    },
+    {
+      "employeeId": "B11723",
+      "fullName": "Medina Ponce, Iván",
+      "email": "ivan.medina@bancosimulado.example",
+      "orgUnitCode": "UO-130",
+      "role": "Desarrollador",
+      "managerId": "B10169",
+      "salaryGrade": "G6"
+    },
+    {
+      "employeeId": "B11760",
+      "fullName": "Ybarra Flores, Elena",
+      "email": "elena.ybarra@bancosimulado.example",
+      "orgUnitCode": "UO-130",
+      "role": "Desarrollador",
+      "managerId": "B10132",
+      "salaryGrade": "G3"
+    },
+    {
+      "employeeId": "B11797",
+      "fullName": "Campos Flores, José",
+      "email": "jose.campos@bancosimulado.example",
+      "orgUnitCode": "UO-130",
+      "role": "QE",
+      "managerId": "B10206",
+      "salaryGrade": "G6"
+    },
+    {
+      "employeeId": "B11834",
+      "fullName": "Ybarra Córdova, Paola",
+      "email": "paola.ybarra@bancosimulado.example",
+      "orgUnitCode": "UO-130",
+      "role": "LT",
+      "managerId": "B10132",
+      "salaryGrade": "G6"
+    },
+    {
+      "employeeId": "B11871",
+      "fullName": "Benites Cárdenas, Elena",
+      "email": "elena.benites@bancosimulado.example",
+      "orgUnitCode": "UO-120",
+      "role": "Desarrollador",
+      "managerId": "B10132",
+      "salaryGrade": "G5"
+    },
+    {
+      "employeeId": "B11908",
+      "fullName": "Campos Tello, Mónica",
+      "email": "monica.campos@bancosimulado.example",
+      "orgUnitCode": "UO-130",
+      "role": "Desarrollador",
+      "managerId": "B10169",
+      "salaryGrade": "G3"
+    },
+    {
+      "employeeId": "B11945",
+      "fullName": "Cárdenas Infante, Iván",
+      "email": "ivan.cardenas@bancosimulado.example",
+      "orgUnitCode": "UO-130",
+      "role": "Desarrollador",
+      "managerId": "B10132",
+      "salaryGrade": "G4"
+    },
+    {
+      "employeeId": "B11982",
+      "fullName": "Gutiérrez Ybarra, Valeria",
+      "email": "valeria.gutierrez@bancosimulado.example",
+      "orgUnitCode": "UO-130",
+      "role": "QE",
+      "managerId": "B10206",
+      "salaryGrade": "G6"
+    }
+  ],
+  "salaryGradeAccess": {
+    "allowedRoles": [
+      "CAL",
+      "Gerente"
+    ],
+    "note": "Solo estos roles pueden consultar el grado, y solo de personas bajo su jerarquía."
+  }
+}

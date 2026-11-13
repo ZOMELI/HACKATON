@@ -1,0 +1,227 @@
+openapi: 3.0.3
+info:
+  title: mock-sources
+  version: 1.0.0
+  description: >
+    APIs simuladas de solo lectura para Jira, SIGA y PREPER. Sirven los JSON del paquete de datos simulados.
+    Las respuestas conservan la forma de cada fuente; por eso los esquemas son objetos libres.
+servers:
+  - url: http://localhost:8081
+tags:
+  - name: sources
+paths:
+  /jira/rest/api/3/project:
+    get:
+      tags: [sources]
+      operationId: listJiraProjects
+      summary: Proyectos de Jira (un proyecto por squad)
+      responses:
+        "200":
+          description: Proyectos con su categoría Running o Growth
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/SourceRecord"
+  /jira/rest/api/3/search:
+    get:
+      tags: [sources]
+      operationId: searchJiraIssues
+      summary: Issues por responsable, proyecto y fecha de creación
+      parameters:
+        - name: assignee
+          in: query
+          description: Correo del responsable; no distingue mayúsculas.
+          schema:
+            type: string
+        - name: project
+          in: query
+          schema:
+            type: string
+        - name: createdAfter
+          in: query
+          description: Fecha mínima de creación en formato AAAA-MM-DD.
+          schema:
+            type: string
+        - name: startAt
+          in: query
+          schema:
+            type: integer
+            default: 0
+        - name: maxResults
+          in: query
+          schema:
+            type: integer
+            default: 50
+      responses:
+        "200":
+          description: Página de issues con startAt, maxResults, total e issues
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SourceRecord"
+  /siga/org-units:
+    get:
+      tags: [sources]
+      operationId: listSigaOrgUnits
+      summary: Unidades organizacionales
+      responses:
+        "200":
+          description: Unidades
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/SourceRecord"
+  /siga/employees:
+    get:
+      tags: [sources]
+      operationId: listSigaEmployees
+      summary: Personal del banco, sin grado salarial
+      parameters:
+        - name: orgUnitCode
+          in: query
+          schema:
+            type: string
+        - name: managerId
+          in: query
+          schema:
+            type: string
+        - name: email
+          in: query
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Personas que cumplen los filtros
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/SourceRecord"
+  /siga/employees/{employeeId}:
+    get:
+      tags: [sources]
+      operationId: getSigaEmployee
+      summary: Unidad, rol y responsable de una persona
+      parameters:
+        - $ref: "#/components/parameters/EmployeeId"
+      responses:
+        "200":
+          description: Persona, sin grado salarial
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SourceRecord"
+        "404":
+          $ref: "#/components/responses/NotFound"
+  /siga/employees/{employeeId}/salary-grade:
+    get:
+      tags: [sources]
+      operationId: getSigaSalaryGrade
+      summary: Grado salarial, solo para CAL o gerente dentro de su jerarquía
+      parameters:
+        - $ref: "#/components/parameters/EmployeeId"
+        - name: X-Requester-Id
+          in: header
+          required: true
+          description: Matrícula de quien consulta.
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Grado salarial
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SourceRecord"
+        "403":
+          description: Quien consulta no tiene permiso
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SourceRecord"
+        "404":
+          $ref: "#/components/responses/NotFound"
+  /preper/boxes:
+    get:
+      tags: [sources]
+      operationId: listPreperBoxes
+      summary: Cajas presupuestales
+      parameters:
+        - name: employeeId
+          in: query
+          schema:
+            type: string
+        - name: status
+          in: query
+          description: Ocupada, Vacante o Cerrada.
+          schema:
+            type: string
+        - name: fundingTribe
+          in: query
+          schema:
+            type: string
+        - name: budgetCategory
+          in: query
+          description: Running o Growth.
+          schema:
+            type: string
+        - name: expiringBefore
+          in: query
+          description: Fecha máxima de fin de vigencia en formato AAAA-MM-DD.
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Cajas que cumplen los filtros
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/SourceRecord"
+  /preper/boxes/{boxId}:
+    get:
+      tags: [sources]
+      operationId: getPreperBox
+      summary: Una caja por su identificador
+      parameters:
+        - name: boxId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Caja encontrada
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SourceRecord"
+        "404":
+          $ref: "#/components/responses/NotFound"
+components:
+  parameters:
+    EmployeeId:
+      name: employeeId
+      in: path
+      required: true
+      description: Matrícula.
+      schema:
+        type: string
+  responses:
+    NotFound:
+      description: El recurso no existe
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/SourceRecord"
+  schemas:
+    SourceRecord:
+      type: object
+      description: Registro con la forma de la fuente original. Ver los contratos de detalle en contracts-reference/.
+      additionalProperties: true

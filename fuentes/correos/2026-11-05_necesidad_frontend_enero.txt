@@ -1,0 +1,12 @@
+De: Guerra Pacheco, Lorena <lorena.guerra@bancosimulado.example>
+Para: Chávez Arce, María <maria.chavez@bancosimulado.example>; Mendoza Campos, Carlos <carlos.mendoza@bancosimulado.example>
+Fecha: 2026-11-05
+Asunto: Necesidad de capacidad para Apertura con DNI
+
+Hola,
+
+Les adelanto que para el arranque de Apertura con DNI vamos a necesitar dos desarrolladores Frontend adicionales en el squad Apertura Digital desde la segunda semana de enero.
+
+Todavía no lo registro en el portal de staffing porque falta definir si será con personal del banco o con proveedor. ¿Lo vemos la próxima semana?
+
+Lorena

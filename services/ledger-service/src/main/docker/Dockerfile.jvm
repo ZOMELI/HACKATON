@@ -1,0 +1,9 @@
+# Imagen JVM del servicio. Antes de construirla: mvn package (genera target/quarkus-app).
+FROM eclipse-temurin:21-jre
+WORKDIR /deployments
+COPY target/quarkus-app/lib/ /deployments/lib/
+COPY target/quarkus-app/*.jar /deployments/
+COPY target/quarkus-app/app/ /deployments/app/
+COPY target/quarkus-app/quarkus/ /deployments/quarkus/
+EXPOSE 8083
+ENTRYPOINT ["java", "-Dquarkus.http.host=0.0.0.0", "-Djava.util.logging.manager=org.jboss.logmanager.LogManager", "-jar", "/deployments/quarkus-run.jar"]

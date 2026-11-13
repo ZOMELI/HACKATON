@@ -1,0 +1,103 @@
+# Levanta la base H2 compartida y los 6 microservicios.
+# Antes: mvn package (o scripts/build-all.sh) para generar target/quarkus-app en cada servicio.
+name: people-capacity
+
+x-db: &db
+  DB_USER: sa
+  DB_PASSWORD: peoplecapacity
+
+x-service: &service
+  restart: on-failure
+
+services:
+  h2:
+    build: ./database
+    environment:
+      H2_PASSWORD: peoplecapacity
+    ports:
+      - "9092:9092"   # JDBC por TCP
+      - "8090:8090"   # consola web de H2
+    volumes:
+      - h2-data:/data
+
+  mock-sources:
+    <<: *service
+    build:
+      context: ./services/mock-sources
+      dockerfile: src/main/docker/Dockerfile.jvm
+    ports:
+      - "8081:8081"
+
+  ingestion-service:
+    <<: *service
+    build:
+      context: ./services/ingestion-service
+      dockerfile: src/main/docker/Dockerfile.jvm
+    environment:
+      <<: *db
+      DB_URL: jdbc:h2:tcp://h2:9092/peoplecapacity;SCHEMA=INGESTION
+      MOCK_SOURCES_URL: http://mock-sources:8081
+      LEDGER_URL: http://ledger-service:8083
+      CASES_URL: http://cases-service:8084
+      SOURCES_DIR: /fuentes
+    volumes:
+      - ./fuentes:/fuentes:ro
+    ports:
+      - "8082:8082"
+    depends_on: [h2, mock-sources, ledger-service, cases-service]
+
+  ledger-service:
+    <<: *service
+    build:
+      context: ./services/ledger-service
+      dockerfile: src/main/docker/Dockerfile.jvm
+    environment:
+      <<: *db
+      DB_URL: jdbc:h2:tcp://h2:9092/peoplecapacity;SCHEMA=LEDGER
+      MOCK_SOURCES_URL: http://mock-sources:8081
+    ports:
+      - "8083:8083"
+    depends_on: [h2, mock-sources]
+
+  cases-service:
+    <<: *service
+    build:
+      context: ./services/cases-service
+      dockerfile: src/main/docker/Dockerfile.jvm
+    environment:
+      <<: *db
+      DB_URL: jdbc:h2:tcp://h2:9092/peoplecapacity;SCHEMA=CASES
+      LEDGER_URL: http://ledger-service:8083
+      AGENTS_URL: http://agents-service:8086
+    ports:
+      - "8084:8084"
+    depends_on: [h2, ledger-service, agents-service]
+
+  demand-service:
+    <<: *service
+    build:
+      context: ./services/demand-service
+      dockerfile: src/main/docker/Dockerfile.jvm
+    environment:
+      <<: *db
+      DB_URL: jdbc:h2:tcp://h2:9092/peoplecapacity;SCHEMA=DEMAND
+      LEDGER_URL: http://ledger-service:8083
+    ports:
+      - "8085:8085"
+    depends_on: [h2, ledger-service]
+
+  agents-service:
+    <<: *service
+    build:
+      context: ./services/agents-service
+      dockerfile: src/main/docker/Dockerfile.jvm
+    environment:
+      <<: *db
+      DB_URL: jdbc:h2:tcp://h2:9092/peoplecapacity;SCHEMA=AGENTS
+      AGENTS_MODE: recorded
+    ports:
+      - "8086:8086"
+    depends_on: [h2]
+
+volumes:
+  h2-data:

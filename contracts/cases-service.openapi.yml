@@ -1,0 +1,283 @@
+openapi: 3.0.3
+info:
+  title: cases-service
+  version: 1.0.0
+  description: >
+    Reglas de conciliación, casos, alertas de vencimiento y decisiones del responsable.
+    Las reglas detectan y una persona decide; cada decisión vuelve al libro como afirmación.
+servers:
+  - url: http://localhost:8084
+tags:
+  - name: cases
+paths:
+  /reconciliations:
+    post:
+      tags: [cases]
+      operationId: runReconciliation
+      summary: Ejecuta las reglas sobre las afirmaciones del libro y abre casos
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ReconciliationRequest"
+      responses:
+        "202":
+          description: Resultado de la conciliación
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ReconciliationResult"
+  /cases:
+    get:
+      tags: [cases]
+      operationId: listCases
+      summary: Bandeja de casos
+      parameters:
+        - name: status
+          in: query
+          description: OPEN o RESOLVED.
+          schema:
+            type: string
+        - name: type
+          in: query
+          schema:
+            type: string
+        - name: ownerId
+          in: query
+          description: Matrícula del responsable.
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Casos que cumplen los filtros
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/CaseFile"
+  /cases/{caseId}:
+    get:
+      tags: [cases]
+      operationId: getCase
+      summary: Detalle de un caso
+      parameters:
+        - $ref: "#/components/parameters/CaseId"
+      responses:
+        "200":
+          description: Caso con sus personas, resumen y decisión
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CaseFile"
+        "404":
+          $ref: "#/components/responses/NotFound"
+  /cases/{caseId}/decisions:
+    post:
+      tags: [cases]
+      operationId: decideCase
+      summary: Registra la decisión del responsable
+      parameters:
+        - $ref: "#/components/parameters/CaseId"
+        - name: X-User-Id
+          in: header
+          required: true
+          description: Matrícula de quien decide.
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/DecisionInput"
+      responses:
+        "201":
+          description: Decisión registrada
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Decision"
+        "404":
+          $ref: "#/components/responses/NotFound"
+        "409":
+          description: El caso ya estaba resuelto
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+  /availability:
+    get:
+      tags: [cases]
+      operationId: listAvailability
+      summary: Disponibilidad prevista y confirmada, ordenada por fecha
+      responses:
+        "200":
+          description: Lista de disponibilidad
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/AvailabilityItem"
+  /alert-settings:
+    get:
+      tags: [cases]
+      operationId: getAlertSettings
+      summary: Días de anticipación de las alertas
+      responses:
+        "200":
+          description: Configuración vigente
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AlertSettings"
+    put:
+      tags: [cases]
+      operationId: updateAlertSettings
+      summary: Cambia los días de anticipación
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AlertSettings"
+      responses:
+        "200":
+          description: Configuración guardada
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AlertSettings"
+components:
+  parameters:
+    CaseId:
+      name: caseId
+      in: path
+      required: true
+      schema:
+        type: integer
+        format: int64
+  responses:
+    NotFound:
+      description: El recurso no existe
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/Error"
+  schemas:
+    ReconciliationRequest:
+      type: object
+      properties:
+        syncRunId:
+          type: string
+    ReconciliationResult:
+      type: object
+      properties:
+        opened:
+          type: integer
+        alreadyOpen:
+          type: integer
+    CaseFile:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        type:
+          type: string
+          description: >
+            SWAP (enroque), TEMPORARY_SUPPORT, CATEGORY_MISMATCH, INVENTORY_LAG, ACT_REPLACEMENT,
+            NO_FUNDING, UNLINKED_IDENTITY o EXPIRATION.
+        title:
+          type: string
+        status:
+          type: string
+        ownerId:
+          type: string
+        dueDate:
+          type: string
+          format: date
+        openedAt:
+          type: string
+        personIds:
+          type: array
+          items:
+            type: string
+        summary:
+          type: string
+          description: Resumen redactado por IA.
+        options:
+          type: array
+          description: Opciones de decisión definidas por las reglas.
+          items:
+            type: string
+        decision:
+          $ref: "#/components/schemas/Decision"
+        caseKey:
+          type: string
+          description: Clave de negocio que evita abrir dos veces el mismo caso.
+    DecisionInput:
+      type: object
+      required: [option]
+      properties:
+        option:
+          type: string
+        validUntil:
+          type: string
+          format: date
+        note:
+          type: string
+    Decision:
+      type: object
+      properties:
+        caseId:
+          type: integer
+          format: int64
+        option:
+          type: string
+        decidedBy:
+          type: string
+        decidedAt:
+          type: string
+        validUntil:
+          type: string
+          format: date
+        note:
+          type: string
+    AvailabilityItem:
+      type: object
+      properties:
+        personId:
+          type: string
+        fundingRef:
+          type: string
+        availableFrom:
+          type: string
+          format: date
+        state:
+          type: string
+          description: FORECAST o CONFIRMED.
+        confirmerId:
+          type: string
+        caseId:
+          type: integer
+          format: int64
+    AlertSettings:
+      type: object
+      required: [firstAlertDays, secondAlertDays]
+      properties:
+        firstAlertDays:
+          type: integer
+          minimum: 1
+        secondAlertDays:
+          type: integer
+          minimum: 1
+    Error:
+      type: object
+      properties:
+        code:
+          type: string
+        message:
+          type: string

@@ -1,0 +1,13 @@
+De: Farfán Gutiérrez, Gustavo <gustavo.farfan@pacifico-soft.example>
+Para: Mendoza Núñez, Daniela <daniela.mendoza@bancosimulado.example>
+Fecha: 2026-10-25
+Asunto: Reemplazo en el acta ACT-2026-316
+
+Hola,
+
+Les informo que Mendoza Chávez, Víctor (P20218) deja la cuenta el 2026-10-26. Desde esa fecha lo reemplaza Vargas Arce, Sergio (P20833), correo sergio.vargas@pacifico-soft.example, con el mismo perfil de QE.
+
+Ya actualicé la persona asociada al acta ACT-2026-316. La vigencia y la fuente presupuestal no cambian.
+
+Saludos,
+Gustavo

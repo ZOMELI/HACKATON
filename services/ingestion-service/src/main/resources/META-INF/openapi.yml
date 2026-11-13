@@ -1,0 +1,103 @@
+openapi: 3.0.3
+info:
+  title: ingestion-service
+  version: 1.0.0
+  description: >
+    Lee las fuentes (APIs simuladas, Excel y correos), enlaza a cada persona por matrícula y correo,
+    y entrega afirmaciones al libro y necesidades a demanda. Es el único servicio que toca las fuentes.
+servers:
+  - url: http://localhost:8082
+tags:
+  - name: ingestion
+paths:
+  /sync:
+    post:
+      tags: [ingestion]
+      operationId: startSync
+      summary: Sincroniza todas las fuentes y dispara la conciliación
+      responses:
+        "201":
+          description: Resultado de la sincronización, fuente por fuente
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SyncRun"
+  /sync-runs:
+    get:
+      tags: [ingestion]
+      operationId: listSyncRuns
+      summary: Sincronizaciones anteriores, de la más reciente a la más antigua
+      responses:
+        "200":
+          description: Lista de sincronizaciones
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/SyncRun"
+  /sync-runs/{runId}:
+    get:
+      tags: [ingestion]
+      operationId: getSyncRun
+      summary: Detalle de una sincronización
+      parameters:
+        - name: runId
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        "200":
+          description: Sincronización encontrada
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SyncRun"
+        "404":
+          description: La sincronización no existe
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+components:
+  schemas:
+    SyncRun:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        startedAt:
+          type: string
+        finishedAt:
+          type: string
+        status:
+          type: string
+          description: COMPLETED o PARTIAL (alguna fuente falló).
+        claimsSent:
+          type: integer
+        sources:
+          type: array
+          items:
+            $ref: "#/components/schemas/SourceResult"
+    SourceResult:
+      type: object
+      properties:
+        source:
+          type: string
+        status:
+          type: string
+          description: OK, FAILED o NOT_IMPLEMENTED.
+        records:
+          type: integer
+        message:
+          type: string
+    Error:
+      type: object
+      properties:
+        code:
+          type: string
+        message:
+          type: string

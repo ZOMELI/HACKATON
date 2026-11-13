@@ -1,0 +1,218 @@
+{
+  "fecha_referencia": "2026-11-13",
+  "casos": [
+    {
+      "id": "ENR-1",
+      "tipo": "enroque",
+      "personas": [
+        "B10576",
+        "B10761"
+      ],
+      "debe_abrir_caso": true,
+      "descripcion": "Personal del banco. Cajas Running y Growth cruzadas con trabajo en Pagos QR y Transferencias. El presupuesto no cambia.",
+      "evidencia": "2026-10-07_conformidad_enroque_pagos.txt"
+    },
+    {
+      "id": "ENR-2",
+      "tipo": "enroque",
+      "personas": [
+        "P20505",
+        "P20382"
+      ],
+      "debe_abrir_caso": true,
+      "descripcion": "Personal proveedor. Actas Running y Growth cruzadas con trabajo en Apertura Digital y Cuentas Core. Sin evidencia de conformidad.",
+      "evidencia": null
+    },
+    {
+      "id": "TMP-1",
+      "tipo": "apoyo_temporal_otra_tribu",
+      "personas": [
+        "B11908"
+      ],
+      "debe_abrir_caso": true,
+      "descripcion": "Pertenece a Créditos y trabaja a medio tiempo en Recaudación (Pagos). No hay movimiento formal.",
+      "evidencia": "2026-10-21_apoyo_temporal_recaudacion.txt"
+    },
+    {
+      "id": "TMP-2",
+      "tipo": "trabajo_en_otra_categoria",
+      "personas": [
+        "B11723"
+      ],
+      "debe_abrir_caso": true,
+      "descripcion": "Caja Growth y trabajo en Cobranzas (Running), misma tribu y sin contraparte. No es enroque.",
+      "evidencia": null
+    },
+    {
+      "id": "ROT-1",
+      "tipo": "rotacion_misma_tribu",
+      "personas": [
+        "B10613"
+      ],
+      "debe_abrir_caso": false,
+      "descripcion": "Pasó de Transferencias a Recaudación: misma tribu y misma categoría. Solo se registra.",
+      "evidencia": null
+    },
+    {
+      "id": "ROT-2",
+      "tipo": "rotacion_misma_tribu",
+      "personas": [
+        "B11242"
+      ],
+      "debe_abrir_caso": false,
+      "descripcion": "Pasó de Apertura Digital a Onboarding: misma tribu y misma categoría. Solo se registra.",
+      "evidencia": null
+    },
+    {
+      "id": "DES-1",
+      "tipo": "desfase_inventario",
+      "personas": [
+        "B11871"
+      ],
+      "debe_abrir_caso": true,
+      "descripcion": "El inventario dice tribu Créditos. MoviPer MOV-1186, SIGA, PREPER y Jira dicen Cuentas.",
+      "evidencia": "2026-10-20_aprobacion_cambio_tribu.txt"
+    },
+    {
+      "id": "DES-2",
+      "tipo": "desfase_inventario",
+      "personas": [
+        "B11390"
+      ],
+      "debe_abrir_caso": true,
+      "descripcion": "El inventario dice Desarrollador y SIGA dice Arquitecto de Solución. MOV-1187 figura aprobado sin evidencia: hallazgo de auditoría.",
+      "evidencia": null
+    },
+    {
+      "id": "DES-3",
+      "tipo": "reemplazo_en_acta",
+      "personas": [
+        "P20218",
+        "P20833"
+      ],
+      "debe_abrir_caso": true,
+      "descripcion": "El acta ACT-2026-316 ya tiene a la persona nueva. El inventario conserva a la anterior y no registra a la nueva.",
+      "evidencia": "2026-10-25_reemplazo_persona_acta.txt"
+    },
+    {
+      "id": "SIN-1",
+      "tipo": "sin_fuente_presupuestal",
+      "personas": [
+        "P20587"
+      ],
+      "debe_abrir_caso": true,
+      "descripcion": "Actividad vigente en Jira con el acta vencida hace 30 días. Queda pendiente de confirmar.",
+      "evidencia": null
+    },
+    {
+      "id": "SIN-2",
+      "tipo": "sin_correspondencia",
+      "personas": [
+        "soporte.externo@consultora-norte.example"
+      ],
+      "debe_abrir_caso": true,
+      "descripcion": "Usuario de Jira que no enlaza con ninguna persona por matrícula ni por correo.",
+      "evidencia": null
+    },
+    {
+      "id": "IDN-1",
+      "tipo": "identidad",
+      "personas": [
+        "B11464"
+      ],
+      "debe_abrir_caso": false,
+      "descripcion": "Jira guarda el correo con otra capitalización. Debe enlazar con la misma persona.",
+      "evidencia": null
+    },
+    {
+      "id": "VEN-1",
+      "tipo": "vencimiento",
+      "personas": [
+        "P20095"
+      ],
+      "debe_abrir_caso": true,
+      "descripcion": "Acta ACT-2026-307 vence el 2026-12-08. Disponibilidad prevista; confirma Mendoza Núñez, Daniela.",
+      "evidencia": null
+    },
+    {
+      "id": "VEN-2",
+      "tipo": "vencimiento",
+      "personas": [
+        "B11760"
+      ],
+      "debe_abrir_caso": true,
+      "descripcion": "Caja temporal PRE-4530 vence el 2027-01-02. Disponibilidad prevista; confirma Tello Espinoza, Carlos.",
+      "evidencia": null
+    },
+    {
+      "id": "VEN-3",
+      "tipo": "vencimiento",
+      "personas": [
+        "P20546"
+      ],
+      "debe_abrir_caso": true,
+      "descripcion": "Acta ACT-2026-340 vence el 2026-11-25, pero hay correo de renovación: se cierra sin liberar.",
+      "evidencia": "2026-11-08_renovacion_acta_qe.txt"
+    },
+    {
+      "id": "VEN-4",
+      "tipo": "vencimiento",
+      "personas": [
+        "P20259"
+      ],
+      "debe_abrir_caso": true,
+      "descripcion": "Acta ACT-2026-319 vence el 2026-12-28. Disponibilidad prevista; sin información adicional.",
+      "evidencia": null
+    }
+  ],
+  "demanda": [
+    {
+      "id": "NEC-0041",
+      "esperado": "Reclutamiento informa Entrevistas."
+    },
+    {
+      "id": "NEC-0042",
+      "esperado": "Sin registro de Reclutamiento: estado pendiente de confirmar."
+    },
+    {
+      "id": "NEC-0043",
+      "esperado": "La caja PRE-9999 no existe en PREPER: inconsistencia a señalar."
+    },
+    {
+      "id": "NEC-0044",
+      "esperado": "Reclutamiento informa Cubierta."
+    },
+    {
+      "id": "NEC-0045",
+      "esperado": "Candidato propuesto: Ybarra Flores, Elena (B11760), Desarrollador con disponibilidad prevista antes de la fecha requerida.",
+      "candidato": "B11760"
+    },
+    {
+      "id": "ACT-2026-361",
+      "esperado": "Acta en creación para un QE en Créditos. Candidato propuesto: Zegarra Soto, Ernesto (P20095).",
+      "candidato": "P20095"
+    },
+    {
+      "id": "2026-11-05_necesidad_frontend_enero.txt",
+      "esperado": "Necesidad informal de dos desarrolladores Frontend para enero, comunicada por correo y sin registro en el portal."
+    }
+  ],
+  "auditoria": [
+    {
+      "id": "MOV-1186",
+      "esperado": "Aprobado con evidencia en correo."
+    },
+    {
+      "id": "MOV-1187",
+      "esperado": "Aprobado sin evidencia: hallazgo."
+    },
+    {
+      "id": "MOV-1188",
+      "esperado": "Cambio de grado aprobado con evidencia. El valor del grado no debe mostrarse."
+    },
+    {
+      "id": "MOV-1189",
+      "esperado": "Pendiente de aprobación; aún no surte efecto."
+    }
+  ]
+}

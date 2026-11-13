@@ -1,0 +1,119 @@
+openapi: 3.0.3
+info:
+  title: agents-service
+  version: 1.0.0
+  description: >
+    Agente de evidencia y agente de expediente. Es el único servicio que llama al modelo de lenguaje.
+    Los agentes leen y redactan; no detectan ni deciden. Con AGENTS_MODE=recorded responde sin modelo.
+servers:
+  - url: http://localhost:8086
+tags:
+  - name: agents
+paths:
+  /evidence-extractions:
+    post:
+      tags: [agents]
+      operationId: extractEvidence
+      summary: Convierte un correo en evidencia estructurada
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/EvidenceRequest"
+      responses:
+        "200":
+          description: Evidencia extraída
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/EvidenceExtraction"
+  /case-summaries:
+    post:
+      tags: [agents]
+      operationId: summarizeCase
+      summary: Redacta el resumen de un caso y el texto de sus opciones
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CaseSummaryRequest"
+      responses:
+        "200":
+          description: Resumen redactado
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CaseSummary"
+components:
+  schemas:
+    EvidenceRequest:
+      type: object
+      required: [emailId, text]
+      properties:
+        emailId:
+          type: string
+          description: Nombre del archivo del correo.
+        text:
+          type: string
+    EvidenceExtraction:
+      type: object
+      properties:
+        emailId:
+          type: string
+        type:
+          type: string
+          description: >
+            MOVEMENT_APPROVAL, SWAP_CONSENT, ACT_RENEWAL, ACT_REPLACEMENT, TEMPORARY_SUPPORT,
+            INFORMAL_NEED o IRRELEVANT.
+        personIds:
+          type: array
+          items:
+            type: string
+        references:
+          type: array
+          description: Identificadores de movimiento o acta citados en el correo.
+          items:
+            type: string
+        approver:
+          type: string
+        quote:
+          type: string
+          description: Cita textual que respalda la extracción.
+        generatedBy:
+          type: string
+          description: MODEL o RECORDED.
+    CaseSummaryRequest:
+      type: object
+      required: [caseId, caseType]
+      properties:
+        caseId:
+          type: integer
+          format: int64
+        caseType:
+          type: string
+        facts:
+          type: array
+          description: Afirmaciones en conflicto y evidencia, ya redactadas como hechos.
+          items:
+            type: string
+        options:
+          type: array
+          description: Opciones de decisión definidas por las reglas.
+          items:
+            type: string
+    CaseSummary:
+      type: object
+      properties:
+        caseId:
+          type: integer
+          format: int64
+        summary:
+          type: string
+        optionTexts:
+          type: array
+          items:
+            type: string
+        generatedBy:
+          type: string

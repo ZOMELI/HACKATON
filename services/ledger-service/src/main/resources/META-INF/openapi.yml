@@ -1,0 +1,264 @@
+openapi: 3.0.3
+info:
+  title: ledger-service
+  version: 1.0.0
+  description: >
+    Libro de afirmaciones. Guarda lo que dice cada fuente sobre cada persona, con fuente y fecha.
+    Solo agrega: nunca sobrescribe. Rechaza una afirmación de una fuente no autorizada para su dimensión.
+servers:
+  - url: http://localhost:8083
+tags:
+  - name: ledger
+paths:
+  /claims/batch:
+    post:
+      tags: [ledger]
+      operationId: recordClaims
+      summary: Registra un lote de afirmaciones
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ClaimBatch"
+      responses:
+        "201":
+          description: Resultado del registro
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ClaimBatchResult"
+  /claims:
+    get:
+      tags: [ledger]
+      operationId: listClaims
+      summary: Consulta afirmaciones vigentes
+      parameters:
+        - name: personId
+          in: query
+          schema:
+            type: string
+        - name: dimension
+          in: query
+          description: ORG_MEMBERSHIP, ROLE, MANAGEMENT, FUNDING, OPERATIONAL_ASSIGNMENT, AVAILABILITY, EVIDENCE o DECISION.
+          schema:
+            type: string
+        - name: status
+          in: query
+          description: ASSERTED, FORECAST, CONFIRMED o PENDING.
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Afirmaciones que cumplen los filtros
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Claim"
+  /people/{personId}/profile:
+    get:
+      tags: [ledger]
+      operationId: getProfile
+      summary: Ficha de la persona con las cuatro dimensiones
+      parameters:
+        - $ref: "#/components/parameters/PersonId"
+        - $ref: "#/components/parameters/UserId"
+      responses:
+        "200":
+          description: Ficha con fuente y fecha de cada dato
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PersonProfile"
+        "404":
+          $ref: "#/components/responses/NotFound"
+  /people/{personId}/history:
+    get:
+      tags: [ledger]
+      operationId: getHistory
+      summary: Historial completo de afirmaciones de la persona
+      parameters:
+        - $ref: "#/components/parameters/PersonId"
+      responses:
+        "200":
+          description: Afirmaciones de la más reciente a la más antigua
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Claim"
+  /people/{personId}/salary-grade:
+    get:
+      tags: [ledger]
+      operationId: getSalaryGrade
+      summary: Consulta el grado salarial en SIGA sin guardarlo
+      parameters:
+        - $ref: "#/components/parameters/PersonId"
+        - $ref: "#/components/parameters/UserId"
+      responses:
+        "200":
+          description: Grado salarial
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SalaryGrade"
+        "403":
+          description: Quien consulta no tiene permiso
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+  /audit:
+    get:
+      tags: [ledger]
+      operationId: listAudit
+      summary: Decisiones y evidencias registradas
+      parameters:
+        - name: personId
+          in: query
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Afirmaciones de las dimensiones DECISION y EVIDENCE
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Claim"
+components:
+  parameters:
+    PersonId:
+      name: personId
+      in: path
+      required: true
+      description: Matrícula o código de proveedor.
+      schema:
+        type: string
+    UserId:
+      name: X-User-Id
+      in: header
+      description: Matrícula del usuario simulado que consulta.
+      schema:
+        type: string
+  responses:
+    NotFound:
+      description: El recurso no existe
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/Error"
+  schemas:
+    ClaimBatch:
+      type: object
+      required: [claims]
+      properties:
+        syncRunId:
+          type: string
+        claims:
+          type: array
+          items:
+            $ref: "#/components/schemas/ClaimInput"
+    ClaimInput:
+      type: object
+      required: [personId, dimension, value, source]
+      properties:
+        personId:
+          type: string
+        personName:
+          type: string
+        personEmail:
+          type: string
+        dimension:
+          type: string
+        value:
+          type: string
+        source:
+          type: string
+          description: JIRA, SIGA, PREPER, INVENTORY, PROVIDER_ACT, MOVIPER, EMAIL o CASE_DECISION.
+        validFrom:
+          type: string
+          format: date
+        validTo:
+          type: string
+          format: date
+        observedAt:
+          type: string
+          format: date
+          description: Fecha del dato en la fuente.
+        status:
+          type: string
+        evidenceRef:
+          type: string
+        author:
+          type: string
+    Claim:
+      allOf:
+        - $ref: "#/components/schemas/ClaimInput"
+        - type: object
+          properties:
+            id:
+              type: integer
+              format: int64
+            recordedAt:
+              type: string
+              description: Momento en que el libro registró la afirmación.
+    ClaimBatchResult:
+      type: object
+      properties:
+        recorded:
+          type: integer
+        rejected:
+          type: array
+          items:
+            $ref: "#/components/schemas/RejectedClaim"
+    RejectedClaim:
+      type: object
+      properties:
+        index:
+          type: integer
+        reason:
+          type: string
+    PersonProfile:
+      type: object
+      properties:
+        personId:
+          type: string
+        fullName:
+          type: string
+        email:
+          type: string
+        dimensions:
+          type: array
+          items:
+            $ref: "#/components/schemas/DimensionView"
+    DimensionView:
+      type: object
+      properties:
+        dimension:
+          type: string
+        state:
+          type: string
+          description: CONSISTENT, DISCREPANCY o PENDING.
+        claims:
+          type: array
+          items:
+            $ref: "#/components/schemas/Claim"
+    SalaryGrade:
+      type: object
+      properties:
+        personId:
+          type: string
+        salaryGrade:
+          type: string
+    Error:
+      type: object
+      properties:
+        code:
+          type: string
+        message:
+          type: string
